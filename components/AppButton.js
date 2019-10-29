@@ -7,7 +7,7 @@ import { TouchableOpacity } from 'react-native-gesture-handler';
 class AppButton extends Component {
 	render() {
 		return (
-			<TouchableOpacity>
+			<TouchableOpacity onPress={this.props.onPress}>
 				<View style={[ styles.container, this.props.style ]}>
 					<Text style={styles.item}>{this.props.title}</Text>
 				</View>
