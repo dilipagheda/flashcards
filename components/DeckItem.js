@@ -7,8 +7,8 @@ class DeckItem extends Component {
 		return (
 			<TouchableOpacity style={styles.item} onPress={this.props.showDetail}>
 				<View>
-					<Text style={styles.itemHeader}>Deck 1</Text>
-					<Text style={styles.itemFooter}>0 cards</Text>
+					<Text style={styles.itemHeader}>{this.props.title}</Text>
+					<Text style={styles.itemFooter}>{this.props.noOfCards} cards</Text>
 				</View>
 			</TouchableOpacity>
 		);
