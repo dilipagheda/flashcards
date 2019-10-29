@@ -26,18 +26,28 @@ const initialState = {
 	}
 };
 
-function decks(state = initialState, action) {
+function decksReducer(state = initialState, action) {
 	switch (action.type) {
 		case RECEIVE_DECKS:
 			return state;
 			break;
 		case ADD_DECK:
-			return state;
+			return { ...state, [action.title]: { title: action.title, questions: [] } };
 		case ADD_CARD:
-			return state;
+			return {
+				...state,
+				[action.card.id]: {
+					...state[action.card.id],
+					questions: [ ...state[action.card.id].questions, action.card ]
+				}
+			};
 		case DELETE_DECK:
+			const newObject = { ...state };
+			delete newObject[action.title];
+			return newObject;
+		default:
 			return state;
 	}
 }
 
-export default decks;
+export default decksReducer;
