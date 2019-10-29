@@ -6,7 +6,6 @@ import { TouchableOpacity } from 'react-native-gesture-handler';
 import AppButton from './AppButton';
 import { connect } from 'react-redux';
 import { deleteDeck } from '../actions';
-import AddCard from '../components/AddCard';
 
 class DeckDetail extends Component {
 	onDeletePress = () => {
@@ -18,7 +17,9 @@ class DeckDetail extends Component {
 		this.props.navigation.navigate('AddCard', { id: this.props.id });
 	};
 
-	onStartQuiz = () => {};
+	onStartQuiz = () => {
+		this.props.navigation.navigate('Quiz', { id: this.props.id });
+	};
 
 	render() {
 		const { title, noOfCards } = this.props;
