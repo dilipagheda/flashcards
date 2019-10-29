@@ -13,6 +13,7 @@ import { createStackNavigator } from 'react-navigation-stack';
 import { createStore } from 'redux';
 import { Provider } from 'react-redux';
 import decksReducer from './reducers';
+import Quiz from './components/Quiz';
 
 const Tabs = createBottomTabNavigator(
 	{
@@ -65,6 +66,9 @@ const MainNavigation = createStackNavigator({
 				backgroundColor: purple
 			}
 		}
+	},
+	Quiz: {
+		screen: Quiz
 	},
 	DeckDetail: {
 		screen: DeckDetail,
