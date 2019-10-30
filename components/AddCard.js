@@ -15,6 +15,15 @@ class AddCard extends Component {
 	};
 
 	onAddCard = () => {
+		if (this.state.question.length === 0 || this.state.answer.length === 0) {
+			if (this.state.question.length === 0) {
+				this.setState({ errorMsg1: 'Please enter a question' });
+			}
+			if (this.state.answer.length === 0) {
+				this.setState({ errorMsg2: 'Please enter an answer' });
+			}
+			return;
+		}
 		const id = this.props.navigation.state.params.id;
 
 		const card = {

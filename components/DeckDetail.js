@@ -34,6 +34,11 @@ class DeckDetail extends Component {
 							title="Start Quiz"
 							onPress={this.onStartQuiz}
 							style={{ backgroundColor: purple, color: white }}
+							disabled={
+
+									noOfCards > 0 ? false :
+									true
+							}
 						/>
 					</View>
 				</View>
