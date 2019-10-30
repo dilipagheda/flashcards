@@ -9,7 +9,7 @@ class AppButton extends Component {
 		return (
 			<TouchableOpacity onPress={this.props.onPress}>
 				<View style={[ styles.container, this.props.style ]}>
-					<Text style={styles.item}>{this.props.title}</Text>
+					<Text style={[ styles.item, this.props.style ]}>{this.props.title}</Text>
 				</View>
 			</TouchableOpacity>
 		);
@@ -24,12 +24,14 @@ const styles = StyleSheet.create({
 		margin: 10,
 		justifyContent: 'center',
 		width: 200,
-		alignSelf: 'center'
+		alignSelf: 'center',
+		backgroundColor: purple
 	},
 	item: {
 		textAlign: 'center',
 		alignSelf: 'center',
-		fontSize: 20
+		fontSize: 20,
+		color: white
 	}
 });
 

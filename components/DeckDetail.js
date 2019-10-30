@@ -30,7 +30,11 @@ class DeckDetail extends Component {
 				<View style={{ marginBottom: 50 }}>
 					<View>
 						<AppButton title="Add Card" onPress={this.onAddCard} />
-						<AppButton title="Start Quiz" onPress={this.onStartQuiz} />
+						<AppButton
+							title="Start Quiz"
+							onPress={this.onStartQuiz}
+							style={{ backgroundColor: purple, color: white }}
+						/>
 					</View>
 				</View>
 				<Button title="Delete Deck" onPress={this.onDeletePress} />

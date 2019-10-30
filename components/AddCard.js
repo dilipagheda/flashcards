@@ -8,8 +8,8 @@ import { addNewCardToDeck } from '../actions';
 
 class AddCard extends Component {
 	state = {
-		question: 'what is your name?',
-		answer: 'Dilip the DON',
+		question: '',
+		answer: '',
 		errorMsg1: '',
 		errorMsg2: ''
 	};

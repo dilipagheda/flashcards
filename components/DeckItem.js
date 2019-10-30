@@ -8,7 +8,11 @@ class DeckItem extends Component {
 			<TouchableOpacity style={styles.item} onPress={this.props.showDetail}>
 				<View>
 					<Text style={styles.itemHeader}>{this.props.title}</Text>
-					<Text style={styles.itemFooter}>{this.props.noOfCards} cards</Text>
+					<Text style={styles.itemFooter}>
+						{
+							this.props.noOfCards > 1 ? `${this.props.noOfCards} cards` :
+							`${this.props.noOfCards} card`}
+					</Text>
 				</View>
 			</TouchableOpacity>
 		);
@@ -22,15 +26,18 @@ const styles = StyleSheet.create({
 		padding: 10,
 		borderRadius: 5,
 		borderColor: purple,
-		margin: 10
+		margin: 10,
+		backgroundColor: purple
 	},
 	itemHeader: {
 		textAlign: 'center',
-		fontSize: 25
+		fontSize: 25,
+		color: white
 	},
 	itemFooter: {
 		textAlign: 'center',
-		fontSize: 20
+		fontSize: 20,
+		color: white
 	}
 });
 
