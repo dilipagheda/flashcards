@@ -7,13 +7,15 @@ import CreateDeck from './components/CreateDeck';
 import DeckDetail from './components/DeckDetail';
 import AddCard from './components/AddCard';
 import AppStatusBar from './components/AppStatusBar';
-import { FontAwesome, Ionicons } from '@expo/vector-icons';
+import { Ionicons } from '@expo/vector-icons';
 import { purple, white, red } from './utils/colors';
 import { createStackNavigator } from 'react-navigation-stack';
-import { createStore } from 'redux';
+import { createStore, applyMiddleware } from 'redux';
 import { Provider } from 'react-redux';
 import decksReducer from './reducers';
 import Quiz from './components/Quiz';
+import { setLocalNotification } from './utils/helpers';
+import thunk from 'redux-thunk';
 
 const Tabs = createBottomTabNavigator(
 	{
@@ -87,7 +89,7 @@ const AppContainer = createAppContainer(MainNavigation);
 class App extends Component {
 	render() {
 		return (
-			<Provider store={createStore(decksReducer)}>
+			<Provider store={createStore(decksReducer, applyMiddleware(thunk))}>
 				<View style={{ flex: 1 }}>
 					<AppStatusBar backgroundColor={purple} barStyle="light-content" />
 					<AppContainer />
