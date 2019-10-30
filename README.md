@@ -10,6 +10,9 @@ App can create and hold multiple decks of different cards.
 - run `npm start`
 - if you want to run on physical device, then just scan the QR code using the phone camera. make sure you have installed latest version of expo from the app store
 
+# Testing
+This project is tested using iPhone 6 Plus and also with iPhone 10 simulator.
+
 # Skills gained
 - JavaScript / ES6
 - React
