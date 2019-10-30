@@ -1,8 +1,10 @@
 import React, { Component } from 'react';
-import { StyleSheet, View, Text } from 'react-native';
+import { StyleSheet, View, Text, FlatList, SafeAreaView } from 'react-native';
 import { purple, white } from '../utils/colors';
 import DeckItem from './DeckItem';
 import { connect } from 'react-redux';
+import { getDecks } from '../actions/index';
+import { setLocalNotification } from '../utils/helpers';
 
 class Decks extends Component {
 	renderDecks = () => {
@@ -13,20 +15,34 @@ class Decks extends Component {
 				</View>
 			);
 		} else {
-			return this.props.decks.map((deck) => (
-				<DeckItem
-					key={deck.title}
-					title={deck.title}
-					noOfCards={deck.noOfCards}
-					showDetail={() => this.showDetail(deck.title)}
-				/>
-			));
+			return (
+				<SafeAreaView style={styles.container}>
+					<FlatList
+						data={this.props.decks}
+						renderItem={({ item }) => {
+							return (
+								<DeckItem
+									title={item.title}
+									noOfCards={item.noOfCards}
+									showDetail={() => this.showDetail(item.title)}
+								/>
+							);
+						}}
+						keyExtractor={(item) => item.index}
+					/>
+				</SafeAreaView>
+			);
 		}
 	};
 
 	showDetail = (id) => {
 		this.props.navigation.navigate('DeckDetail', { id });
 	};
+
+	componentDidMount() {
+		this.props.dispatch(getDecks());
+		setLocalNotification();
+	}
 	render() {
 		return (
 			<View style={styles.container}>
@@ -62,15 +78,16 @@ const styles = StyleSheet.create({
 });
 
 function mapStateToProps(state) {
-	const decks = [];
-
+	let decks = [];
+	let index = 0;
 	for (let [ key ] of Object.entries(state)) {
 		const noOfCards =
 			state[key].questions ? state[key].questions.length :
 			0;
-		decks.push({ title: state[key].title, noOfCards });
+		decks.push({ index: index.toString(), title: state[key].title, noOfCards });
+		index = index + 1;
 	}
-
+	decks = decks.sort((a, b) => b.noOfCards - a.noOfCards);
 	return { decks };
 }
 

@@ -4,7 +4,7 @@ import { purple, white, red } from '../utils/colors';
 import AppButton from './AppButton';
 import ErrorMsg from './ErrorMsg';
 import { connect } from 'react-redux';
-import { addCard } from '../actions';
+import { addNewCardToDeck } from '../actions';
 
 class AddCard extends Component {
 	state = {
@@ -15,12 +15,13 @@ class AddCard extends Component {
 	};
 
 	onAddCard = () => {
+		const id = this.props.navigation.state.params.id;
+
 		const card = {
-			id: this.props.navigation.state.params.id,
 			question: this.state.question,
 			answer: this.state.answer
 		};
-		this.props.dispatch(addCard(card));
+		this.props.dispatch(addNewCardToDeck(id, card));
 		this.props.navigation.goBack(null);
 	};
 	render() {

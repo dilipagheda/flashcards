@@ -1,15 +1,13 @@
 import React, { Component } from 'react';
 import { StyleSheet, View, Text, Button } from 'react-native';
 import { purple, white } from '../utils/colors';
-import DeckItem from './DeckItem';
-import { TouchableOpacity } from 'react-native-gesture-handler';
 import AppButton from './AppButton';
 import { connect } from 'react-redux';
-import { deleteDeck } from '../actions';
+import { deleteExistingDeck } from '../actions';
 
 class DeckDetail extends Component {
 	onDeletePress = () => {
-		this.props.dispatch(deleteDeck(this.props.id));
+		this.props.dispatch(deleteExistingDeck(this.props.id));
 		this.props.navigation.navigate('Decks');
 	};
 
@@ -29,8 +27,8 @@ class DeckDetail extends Component {
 					<Text style={styles.itemHeader}>{title}</Text>
 					<Text style={styles.itemFooter}>{noOfCards}</Text>
 				</View>
-				<View style={styles.a}>
-					<View style={styles.b}>
+				<View style={{ marginBottom: 50 }}>
+					<View>
 						<AppButton title="Add Card" onPress={this.onAddCard} />
 						<AppButton title="Start Quiz" onPress={this.onStartQuiz} />
 					</View>
@@ -55,11 +53,7 @@ const styles = StyleSheet.create({
 	itemFooter: {
 		textAlign: 'center',
 		fontSize: 30
-	},
-	a: {
-		marginBottom: 50
-	},
-	b: {}
+	}
 });
 
 function mapStateToProps(state, ownProps) {

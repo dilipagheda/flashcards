@@ -2,9 +2,9 @@ import React, { Component } from 'react';
 import { StyleSheet, View, Text, TextInput } from 'react-native';
 import AppButton from './AppButton';
 import { connect } from 'react-redux';
-import { addDeck } from '../actions';
 import { red } from '../utils/colors';
 import ErrorMsg from './ErrorMsg';
+import { createNewDeck } from '../actions';
 
 class CreateDeck extends Component {
 	state = {
@@ -24,7 +24,7 @@ class CreateDeck extends Component {
 			return;
 		}
 
-		this.props.dispatch(addDeck(this.state.value));
+		this.props.dispatch(createNewDeck(this.state.value));
 		this.setState({ value: '', error: '' });
 		this.props.navigation.navigate('Decks');
 	};
@@ -49,8 +49,6 @@ const styles = StyleSheet.create({
 	container: {
 		flex: 1,
 		padding: 20,
-		// backgroundColor: red,
-		// borderWidth: 1,
 		justifyContent: 'flex-start'
 	},
 	item: {
