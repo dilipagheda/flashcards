@@ -32,8 +32,8 @@ msbuild.wrn
 .vs/
 
 # react native
-node_modules/**/*
-.expo/*
+mobile-flashcards-reactnative/node_modules/**/*
+mobile-flashcards-reactnative/.expo/*
 npm-debug.*
 *.jks
 *.p8
