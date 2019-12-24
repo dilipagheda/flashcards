@@ -26,11 +26,11 @@ This project is tested using iPhone 6 Plus and also with iPhone 10 simulator.
 
 ## Screenshots
 
-|  <img src="https://github.com/dilipagheda/flashcards/mobile-flashcards-reactnative/blob/master/screenshots/IMG_1951.PNG" width=300 height=500 /> |  <img src="https://github.com/dilipagheda/mobile-flashcards/blob/master/screenshots/IMG_1953.PNG" width=300 height=500 /> |
-  <img src="https://github.com/dilipagheda/flashcards/mobile-flashcards-reactnative/blob/master/screenshots/IMG_1954.PNG" width=300 height=500 /> |
-  <img src="https://github.com/dilipagheda/flashcards/mobile-flashcards-reactnative/blob/master/screenshots/IMG_1955.PNG" width=300 height=500 /> |
-  <img src="https://github.com/dilipagheda/flashcards/mobile-flashcards-reactnative/blob/master/screenshots/IMG_1956.PNG" width=300 height=500 /> |
-  <img src="https://github.com/dilipagheda/flashcards/mobile-flashcards-reactnative/blob/master/screenshots/IMG_1957.PNG" width=300 height=500 /> |
-  <img src="https://github.com/dilipagheda/flashcards/mobile-flashcards-reactnative/blob/master/screenshots/IMG_1958.PNG" width=300 height=500 /> |
+|  <img src="https://github.com/dilipagheda/flashcards/blob/master/mobile-flashcards-reactnative/screenshots/IMG_1951.PNG" width=300 height=500 /> |  <img src="https://github.com/dilipagheda/flashcards/blob/master/mobile-flashcards-reactnative/screenshots/IMG_1953.PNG" width=300 height=500 /> |
+  <img src="https://github.com/dilipagheda/flashcards/blob/master/mobile-flashcards-reactnative/screenshots/IMG_1954.PNG" width=300 height=500 /> |
+  <img src="https://github.com/dilipagheda/flashcards/blob/master/mobile-flashcards-reactnative/screenshots/IMG_1955.PNG" width=300 height=500 /> |
+  <img src="https://github.com/dilipagheda/flashcards/blob/master/mobile-flashcards-reactnative/screenshots/IMG_1956.PNG" width=300 height=500 /> |
+  <img src="https://github.com/dilipagheda/flashcards/blob/master/mobile-flashcards-reactnative/screenshots/IMG_1957.PNG" width=300 height=500 /> |
+  <img src="https://github.com/dilipagheda/flashcards/blob/master/mobile-flashcards-reactnative/screenshots/IMG_1958.PNG" width=300 height=500 /> |
 
 
