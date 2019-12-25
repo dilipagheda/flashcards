@@ -12,8 +12,8 @@ namespace web_flashcards_dotnet_mvc.Data
         {
             _decks = new List<Deck>();
             _decks.Add(new Deck() { Id = 1, Name = "JavaScript" });
-            _decks.Add(new Deck() { Id = 1, Name = "React" });
-            _decks.Add(new Deck() { Id = 1, Name = ".NET" });
+            _decks.Add(new Deck() { Id = 2, Name = "React" });
+            _decks.Add(new Deck() { Id = 3, Name = ".NET" });
         }
 
         public void AddDeck(string name)
