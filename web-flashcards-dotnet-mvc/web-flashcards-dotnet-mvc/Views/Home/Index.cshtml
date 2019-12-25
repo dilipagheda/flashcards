@@ -3,10 +3,20 @@
     ViewData["Title"] = "Home Page";
 }
 
-<div class="text-center">
+<div>
     <h1 class="display-4">My Decks</h1>
-    @foreach(Deck deck in Model.GetDecks())
-    {
-        <p>@deck.Name</p>
-    }
+    <div class="row">
+        @foreach(Deck deck in Model.GetDecks())
+        {
+                <div class="col-sm-6 col-md-4 col-lg-3">
+                  <div class="card m-3">
+                      <div class="card-body">
+                        <h5 class="card-title">@deck.Name</h5>
+                        <h6 class="card-subtitle mb-2 text-muted">5 cards</h6>
+                        <a asp-controller="DeckDetail" asp-action="Index" asp-route-id="@deck.Id" class="card-link">View</a>
+                      </div>
+                  </div>
+                </div>
+        }
+    </div>
 </div>
