@@ -25,5 +25,42 @@ namespace web_flashcards_dotnet_mvc.Controllers
             Deck deck = this.deckData.GetDecks().FirstOrDefault(deck => deck.Id == id);
             return View(deck);
         }
+
+        // GET
+        [HttpGet]
+        public IActionResult AddNewCard(int id)
+        {
+            Deck deck = deckData.GetDecks().FirstOrDefault(deck => deck.Id == id);
+            Card card = new Card
+            {
+                DeckId = deck.Id
+            };
+            ViewData["DeckName"] = deck.Name;
+            return View(card);
+        }
+
+        // POST
+        [HttpPost]
+        public IActionResult AddNewCard(int id,Card card)
+        {
+            Deck deck = deckData.GetDecks().FirstOrDefault(deck => deck.Id == id);
+            if (!ModelState.IsValid)
+            {
+                ViewData["DeckName"] = deck.Name;
+                return View(card);
+            }
+            card.DeckId = deck.Id;
+            deckData.AddCardToDeck(card);
+            return RedirectToAction("Index", new { id = deck.Id});
+            
+        }
+
+        // POST
+        [HttpPost]
+        public IActionResult DeleteCard()
+        {
+            return RedirectToAction("Index","Home");
+        }
+
     }
 }
