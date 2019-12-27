@@ -12,7 +12,7 @@
                   <div class="card m-3">
                       <div class="card-body">
                         <h5 class="card-title">@deck.Name</h5>
-                        <h6 class="card-subtitle mb-2 text-muted">5 cards</h6>
+                        <h6 class="card-subtitle mb-2 text-muted">@deck.Cards.Count cards</h6>
                         <a asp-controller="DeckDetail" asp-action="Index" asp-route-id="@deck.Id" class="card-link">View</a>
                       </div>
                   </div>
