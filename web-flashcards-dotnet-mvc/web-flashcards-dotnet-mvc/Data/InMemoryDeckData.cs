@@ -37,5 +37,10 @@ namespace web_flashcards_dotnet_mvc.Data
             card.Id = _decks[card.DeckId-1].Cards.Count + 1;
             _decks[card.DeckId-1].Cards.Add(card);
         }
+        public void DeleteCardFromDeck(int deckId, int cardId)
+        {
+            _decks[deckId-1].Cards.RemoveAt(cardId-1);
+        }
+
     }
 }
