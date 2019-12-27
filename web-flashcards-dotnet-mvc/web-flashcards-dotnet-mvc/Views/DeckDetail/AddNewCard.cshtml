@@ -1,0 +1,22 @@
+﻿@model Card
+
+<div class="row">
+    <div class="col-12">
+        <h1>@ViewData["DeckName"]</h1>
+        <p>Add New Card</p>
+
+        <form asp-controller="DeckDetail" asp-action="AddNewCard" method="post">
+          <div class="form-group">
+            <label asp-for="Question">Question</label>
+            <input asp-for="Question" class="form-control" aria-describedby="question" placeholder="Enter question">
+            <span asp-validation-for="Question" class="text-danger"></span>
+          </div>
+          <div class="form-group">
+            <label asp-for="Answer">Answer</label>
+            <input asp-for="Answer" class="form-control" aria-describedby="answer" placeholder="Enter answer">
+            <span asp-validation-for="Answer" class="text-danger"></span>
+          </div>
+          <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
+    </div>
+</div>
