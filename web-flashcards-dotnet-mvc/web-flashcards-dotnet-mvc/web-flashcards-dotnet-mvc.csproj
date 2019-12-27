@@ -19,5 +19,7 @@
   <ItemGroup>
     <Folder Include="Data\" />
     <Folder Include="Views\DeckDetail\" />
+    <Folder Include="Views\Quiz\" />
+    <Folder Include="ViewModels\" />
   </ItemGroup>
 </Project>

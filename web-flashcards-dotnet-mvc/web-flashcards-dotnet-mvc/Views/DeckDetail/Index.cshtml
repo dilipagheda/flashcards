@@ -5,7 +5,7 @@
         <h1>@Model.Name</h1>
         <p>@($"Total Cards - {Model.Cards.Count}")</p>
         <a href='@Url.Action("AddNewCard","DeckDetail", new { id = Model.Id })' class="btn btn-primary">Add New Card</a>
-        <a href='@Url.Action("Quiz","Index")' class="btn btn-primary">Start Quiz</a>
+        <a href='@Url.Action("Index","Quiz",new { id = Model.Id, currentCardId=-1 })' class="btn btn-primary">Start Quiz</a>
     </div>
 </div>
 <div class="row">

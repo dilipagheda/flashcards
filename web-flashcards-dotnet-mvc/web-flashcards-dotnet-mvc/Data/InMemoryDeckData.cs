@@ -11,7 +11,29 @@ namespace web_flashcards_dotnet_mvc.Data
         public InMemoryDeckData()
         {
             _decks = new List<Deck>();
-            _decks.Add(new Deck() { Id = 1, Name = "JavaScript", Cards = new List<Card>() }) ;
+            _decks.Add(new Deck() { Id = 1, Name = "JavaScript", Cards = new List<Card>() {
+                    new Card()
+                    {
+                        Id=1,
+                        DeckId=1,
+                        Question = "what is javascript?",
+                        Answer = "it is language of internet"
+                    },
+                    new Card()
+                    {
+                        Id=2,
+                        DeckId=1,
+                        Question = "what is c#?",
+                        Answer = "it is language invented by microsoft"
+                    },
+                    new Card()
+                    {
+                        Id=3,
+                        DeckId=1,
+                        Question = "who invented java?",
+                        Answer = "sun microsystem"
+                    }
+                } }) ;
             _decks.Add(new Deck() { Id = 2, Name = "React", Cards = new List<Card>() });
             _decks.Add(new Deck() { Id = 3, Name = ".NET" , Cards = new List<Card>() });
         }
@@ -42,5 +64,22 @@ namespace web_flashcards_dotnet_mvc.Data
             _decks[deckId-1].Cards.RemoveAt(cardId-1);
         }
 
+        //currentCardId = -1 for the first card request
+        public Card GetNextCardFromDeck(int deckId, int currentCardId)
+        {
+            if (currentCardId == -1)
+            {
+                //return first element
+                return _decks[deckId - 1].Cards[0];
+            }
+            if(currentCardId <= _decks[deckId - 1].Cards.Count - 1)
+            {
+                return _decks[deckId - 1].Cards[currentCardId];
+            }
+            else
+            {
+                return null;
+            }
+        }
     }
 }
