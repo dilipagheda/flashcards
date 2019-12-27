@@ -57,9 +57,10 @@ namespace web_flashcards_dotnet_mvc.Controllers
 
         // POST
         [HttpPost]
-        public IActionResult DeleteCard()
+        public IActionResult DeleteCard(int deckId, int cardId)
         {
-            return RedirectToAction("Index","Home");
+            deckData.DeleteCardFromDeck(deckId, cardId);
+            return RedirectToAction("Index", new { id = deckId });
         }
 
     }
