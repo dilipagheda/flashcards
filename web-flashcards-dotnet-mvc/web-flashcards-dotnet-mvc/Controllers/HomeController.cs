@@ -21,12 +21,12 @@ namespace web_flashcards_dotnet_mvc.Controllers
             this.deckData = deckData;
         }
 
-        public IActionResult Index()
+        public ViewResult Index()
         {
             return View(this.deckData);
         }
 
-        public IActionResult CreateDeck()
+        public ViewResult CreateDeck()
         {
             return View();
         }
@@ -48,7 +48,7 @@ namespace web_flashcards_dotnet_mvc.Controllers
         //}
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
-        public IActionResult Error()
+        public ViewResult Error()
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }

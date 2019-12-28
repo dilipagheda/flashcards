@@ -20,7 +20,7 @@ namespace web_flashcards_dotnet_mvc.Controllers
         }
 
         // GET: /<controller>/
-        public IActionResult Index(int id, int currentCardId)
+        public ViewResult Index(int id, int currentCardId)
         {
             Card card = deckData.GetNextCardFromDeck(id, currentCardId);
             if (card == null)

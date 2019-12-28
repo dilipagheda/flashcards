@@ -20,7 +20,7 @@ namespace web_flashcards_dotnet_mvc.Controllers
         }
 
         // GET: /<controller>/
-        public IActionResult Index(int id)
+        public ViewResult Index(int id)
         {
             Deck deck = this.deckData.GetDecks().FirstOrDefault(deck => deck.Id == id);
             return View(deck);
@@ -28,7 +28,7 @@ namespace web_flashcards_dotnet_mvc.Controllers
 
         // GET
         [HttpGet]
-        public IActionResult AddNewCard(int id)
+        public ViewResult AddNewCard(int id)
         {
             Deck deck = deckData.GetDecks().FirstOrDefault(deck => deck.Id == id);
             Card card = new Card
