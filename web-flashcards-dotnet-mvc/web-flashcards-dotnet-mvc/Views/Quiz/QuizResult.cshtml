@@ -1,4 +1,10 @@
 ﻿@model QuizResult
 
-<h1>Quiz Result</h1>
-<p>@Model.totalCorrect correct out of @Model.totalQuestions</p>
+<div class="row">
+    <div class="col-12">
+        <h1>Quiz Result</h1>
+        <p>@Model.TotalCorrect correct out of @Model.TotalQuestions</p>
+        <a href='@Url.Action("Index","Quiz",new { id = Model.DeckId, currentCardId=-1 })' class="btn btn-primary">Restart Quiz</a>
+        <a href='@Url.Action("Index","Home")' class="btn btn-primary">Back to Deck</a>
+    </div>
+</div>

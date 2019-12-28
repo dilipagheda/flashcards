@@ -11,6 +11,9 @@ namespace web_flashcards_dotnet_mvc.Data
         void AddCardToDeck(Card card);
         void DeleteCardFromDeck(int deckId, int cardId);
         Card GetNextCardFromDeck(int deckId, int currentCardId);
+        void UpdateQuizResult(int deckId,bool isCorrect);
+        QuizResult GetQuizResult(int deckId);
+        void ResetQuizResult(int deckId);
         int Commit();
     }
 }

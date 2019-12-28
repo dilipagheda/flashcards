@@ -6,7 +6,6 @@ using Microsoft.AspNetCore.Mvc;
 using web_flashcards_dotnet_mvc.Data;
 using web_flashcards_dotnet_mvc.Models;
 using web_flashcards_dotnet_mvc.ViewModels;
-
 // For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
 namespace web_flashcards_dotnet_mvc.Controllers
@@ -26,12 +25,7 @@ namespace web_flashcards_dotnet_mvc.Controllers
             Card card = deckData.GetNextCardFromDeck(id, currentCardId);
             if (card == null)
             {
-                QuizResult quizResult = new QuizResult()
-                {
-                    totalCorrect = 10,
-                    totalQuestions = 3
-                };
-                return View("QuizResult", quizResult);
+                return View("QuizResult", deckData.GetQuizResult(id));
             }
             QuizCard quizCard = new QuizCard()
             {
@@ -45,7 +39,7 @@ namespace web_flashcards_dotnet_mvc.Controllers
         //GET
         public IActionResult UserResponse(int id, bool isCorrect, int currentCardId)
         {
-
+            deckData.UpdateQuizResult(id, isCorrect);
             return RedirectToAction("Index", new { id , currentCardId });
         }
     }

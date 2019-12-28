@@ -11,7 +11,8 @@ namespace web_flashcards_dotnet_mvc.Data
         public InMemoryDeckData()
         {
             _decks = new List<Deck>();
-            _decks.Add(new Deck() { Id = 1, Name = "JavaScript", Cards = new List<Card>() {
+            _decks.Add(new Deck() { Id = 1, Name = "JavaScript", QuizResult = new QuizResult(),
+                Cards = new List<Card>() {
                     new Card()
                     {
                         Id=1,
@@ -34,14 +35,19 @@ namespace web_flashcards_dotnet_mvc.Data
                         Answer = "sun microsystem"
                     }
                 } }) ;
-            _decks.Add(new Deck() { Id = 2, Name = "React", Cards = new List<Card>() });
-            _decks.Add(new Deck() { Id = 3, Name = ".NET" , Cards = new List<Card>() });
+            _decks.Add(new Deck() { Id = 2, Name = "React", QuizResult = new QuizResult(), Cards = new List<Card>() });
+            _decks.Add(new Deck() { Id = 3, Name = ".NET" , QuizResult = new QuizResult(), Cards = new List<Card>() });
         }
 
         public void AddDeck(string name)
         {
             int count = _decks.Count;
-            _decks.Add(new Deck() { Id = count + 1, Name = name, Cards = new List<Card>() });
+            _decks.Add(new Deck() {
+                Id = count + 1,
+                Name = name,
+                QuizResult = new QuizResult(),
+                Cards = new List<Card>()
+            });
         }
 
         public int Commit()
@@ -69,6 +75,8 @@ namespace web_flashcards_dotnet_mvc.Data
         {
             if (currentCardId == -1)
             {
+                //reset quiz result
+                ResetQuizResult(deckId);
                 //return first element
                 return _decks[deckId - 1].Cards[0];
             }
@@ -80,6 +88,30 @@ namespace web_flashcards_dotnet_mvc.Data
             {
                 return null;
             }
+        }
+
+        public void UpdateQuizResult(int deckId, bool isCorrect)
+        {
+            if(isCorrect)
+            {
+                _decks[deckId-1].QuizResult.TotalCorrect++;
+            }
+            _decks[deckId - 1].QuizResult.DeckId = deckId;
+            _decks[deckId-1].QuizResult.TotalQuestions = _decks[deckId-1].Cards.Count;
+            _decks[deckId-1].QuizResult.Date = DateTime.Now.ToString("dd/MM/yyyy");
+            _decks[deckId-1].QuizResult.Time = DateTime.Now.ToString("HH:mm:ss");
+
+        }
+        public QuizResult GetQuizResult(int deckId)
+        {
+            return _decks[deckId-1].QuizResult;
+        }
+        public void ResetQuizResult(int deckId)
+        {
+            _decks[deckId - 1].QuizResult.TotalCorrect = 0;
+            _decks[deckId - 1].QuizResult.TotalQuestions = 0;
+            _decks[deckId - 1].QuizResult.Date = "";
+            _decks[deckId - 1].QuizResult.Time = "";
         }
     }
 }
