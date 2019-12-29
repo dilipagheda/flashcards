@@ -3,7 +3,7 @@
 
 <div class="row">
     <div class="col-12" style="text-align:center">
-        <div>@Model.Question</div>
+        <div style="margin:10px">@Model.Question</div>
         
         <a href='@Url.Action("UserResponse","Quiz", new { id= Model.DeckId, IsCorrect = true, currentCardId=Model.CardId })' class="btn btn-primary">Correct</a>
         <a href='@Url.Action("UserResponse","Quiz",new { id=Model.DeckId, IsCorrect = false, currentCardId=Model.CardId })' class="btn btn-secondary">Incorrect</a>

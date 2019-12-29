@@ -1,31 +1,35 @@
 ﻿@model Deck
 
 <div class="row">
-    <div class="col-12">
-        <h1>@Model.Name</h1>
-        <p>@($"Total Cards - {Model.Cards.Count}")</p>
-        <a href='@Url.Action("AddNewCard","DeckDetail", new { id = Model.Id })' class="btn btn-primary">Add New Card</a>
-        <a href='@Url.Action("Index","Quiz",new { id = Model.Id, currentCardId=-1 })' class="btn btn-primary">Start Quiz</a>
+    <div class="col-12" style="padding-bottom:10px;border-bottom:1px solid grey">
+        <h1 style="font-size:20px;color:white;background-color:grey;padding:5px;border-radius:5px">@Model.Name</h1>
+        <small >@($"Total Cards: {Model.Cards.Count}")</small>
+        <div style="margin-top:10px">
+            <a href='@Url.Action("Index","Quiz",new { id = Model.Id, currentCardId=-1 })' class="btn btn-primary" style="background-color:white;color:grey;border:2px solid grey">Start Quiz</a>
+            <a href='@Url.Action("AddNewCard","DeckDetail", new { id = Model.Id })' class="btn btn-link">Add New Card</a>
+        </div>
     </div>
 </div>
 <div class="row">
     <div class="col-12 pt-2">
-        <h1>Cards</h1>
+        <h2 style="font-size:20px;">Cards</h2>
         @if(Model.Cards.Count==0)
         {
             <p>You don't have any cards in this deck!</p>
         }
     </div>
     <div class="col-12">
-    <ul class="list-group list-group-horizontal-md">
     @foreach(Card card in Model.Cards)
     {
-        <li class="list-group-item">@card.Question
+        <div class="card" style="box-shadow: 10px 5px 5px grey;margin-bottom:10px">
+          <div class="card-body">
+            <span class="card-text">@card.Question</span>
             <form asp-controller="DeckDetail" asp-action="DeleteCard" asp-route-deckId="@card.DeckId" asp-route-cardId="@card.Id" method="post">
                 <button type="submit" class="btn btn-link">Delete</button>
             </form>
-        </li>
+          </div>
+        </div>
+
     }
-    </ul>
     </div>
 </div>
