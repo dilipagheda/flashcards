@@ -3,6 +3,7 @@ This repo consists of implementation of flashcards projects on different platfor
 
 # Projects
 [Project 1 - Flashcards Mobile App: ReactNative](#user-content-project-1---flashcards-mobile-app-reactnative)
+[Project 2 - Flashcards for Web: .NET Core 3.0 MVC, EF Core, SQL Server](#user-content-project-2-flashcards-for-web---implementation-using-net-core-30-mvc-ef-core-and-sql-server)
 
 # Project 1 - Flashcards Mobile App: ReactNative
 ## Foldername: mobile-flashcards-reactnative
@@ -35,5 +36,30 @@ This project is tested using iPhone 6 Plus and also with iPhone 10 simulator.
   <img src="https://github.com/dilipagheda/flashcards/blob/master/mobile-flashcards-reactnative/screenshots/IMG_1956.PNG" width=300 height=500 /> |
   <img src="https://github.com/dilipagheda/flashcards/blob/master/mobile-flashcards-reactnative/screenshots/IMG_1957.PNG" width=300 height=500 /> |
   <img src="https://github.com/dilipagheda/flashcards/blob/master/mobile-flashcards-reactnative/screenshots/IMG_1958.PNG" width=300 height=500 /> |
+
+# Project-2: Flashcards for Web - Implementation using .NET Core 3.0 MVC, EF Core and SQL Server
+## Foldername: web-flashcards-dotnet-mvc
+This project is the web implementation of Flashcards using .NET Core 3.0 MVC. It uses MVC pattern and generates pages through Razor templating engine. The project has two implementations of DbContext. a) In Memory and b) SQL Server. Simply, switching the object in Dependancy injection container will make it use either of it.
+
+## How to run this project
+- You need to install VS studio, SQL server and .NET Core Runtime as a pre-requisite
+- Once Installed, simply open the project and run it by pressing 'play' button in VS Studio
+- From command line, you can run `dotnet watch run` to run the project using Krestrel web server.
+
+If you are on MacOS, Try VS Studio for MAC. It's amazing. For SQL server on MAC, refer to this article: 
+https://www.quackit.com/sql_server/mac/install_sql_server_on_a_mac.cfm
+
+## Skills used
+- .NET Core 3.0 MVC
+- C#
+- Entity Framework Core
+- SQL Server
+- Dependancy Injection
+- Razor Views and MVC pattern
+- HTML/CSS/JS/Bootstrap/jQuery
+
+## Testing
+- Unit Testing is done through xUnit
+- E2E Testing is done through Cypress
 
 
