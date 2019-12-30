@@ -3,6 +3,7 @@ This repo consists of implementation of flashcards projects on different platfor
 
 # Projects
 [Project 1 - Flashcards Mobile App: ReactNative](#user-content-project-1---flashcards-mobile-app-reactnative)
+
 [Project 2 - Flashcards for Web: .NET Core 3.0 MVC, EF Core, SQL Server](#user-content-project-2-flashcards-for-web---implementation-using-net-core-30-mvc-ef-core-and-sql-server)
 
 # Project 1 - Flashcards Mobile App: ReactNative
