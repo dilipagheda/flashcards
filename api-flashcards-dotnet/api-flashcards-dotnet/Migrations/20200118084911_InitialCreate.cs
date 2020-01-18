@@ -12,7 +12,7 @@ namespace api_flashcards_dotnet.Migrations
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("Sqlite:Autoincrement", true),
-                    Name = table.Column<string>(nullable: true)
+                    Name = table.Column<string>(maxLength: 50, nullable: false)
                 },
                 constraints: table =>
                 {
@@ -25,7 +25,7 @@ namespace api_flashcards_dotnet.Migrations
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("Sqlite:Autoincrement", true),
-                    Name = table.Column<string>(nullable: true),
+                    Name = table.Column<string>(maxLength: 150, nullable: false),
                     DeckId = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
@@ -45,8 +45,8 @@ namespace api_flashcards_dotnet.Migrations
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("Sqlite:Autoincrement", true),
-                    QuestionText = table.Column<string>(nullable: true),
-                    AnswerText = table.Column<string>(nullable: true),
+                    QuestionText = table.Column<string>(maxLength: 500, nullable: false),
+                    AnswerText = table.Column<string>(maxLength: 500, nullable: false),
                     CardId = table.Column<int>(nullable: false)
                 },
                 constraints: table =>

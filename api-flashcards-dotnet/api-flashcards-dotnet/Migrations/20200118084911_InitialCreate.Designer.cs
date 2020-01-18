@@ -8,7 +8,7 @@ using api_flashcards_dotnet.Data;
 namespace api_flashcards_dotnet.Migrations
 {
     [DbContext(typeof(FlashcardDbContext))]
-    [Migration("20200118081432_InitialCreate")]
+    [Migration("20200118084911_InitialCreate")]
     partial class InitialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -27,7 +27,9 @@ namespace api_flashcards_dotnet.Migrations
                         .HasColumnType("INTEGER");
 
                     b.Property<string>("Name")
-                        .HasColumnType("TEXT");
+                        .IsRequired()
+                        .HasColumnType("TEXT")
+                        .HasMaxLength(150);
 
                     b.HasKey("Id");
 
@@ -43,7 +45,9 @@ namespace api_flashcards_dotnet.Migrations
                         .HasColumnType("INTEGER");
 
                     b.Property<string>("Name")
-                        .HasColumnType("TEXT");
+                        .IsRequired()
+                        .HasColumnType("TEXT")
+                        .HasMaxLength(50);
 
                     b.HasKey("Id");
 
@@ -57,13 +61,17 @@ namespace api_flashcards_dotnet.Migrations
                         .HasColumnType("INTEGER");
 
                     b.Property<string>("AnswerText")
-                        .HasColumnType("TEXT");
+                        .IsRequired()
+                        .HasColumnType("TEXT")
+                        .HasMaxLength(500);
 
                     b.Property<int>("CardId")
                         .HasColumnType("INTEGER");
 
                     b.Property<string>("QuestionText")
-                        .HasColumnType("TEXT");
+                        .IsRequired()
+                        .HasColumnType("TEXT")
+                        .HasMaxLength(500);
 
                     b.HasKey("Id");
 
