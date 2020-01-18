@@ -30,6 +30,7 @@ namespace api_flashcards_dotnet
             services.AddControllers();
             services.AddDbContext<FlashcardDbContext>(options =>
                 options.UseSqlite("Data Source=flashcards.db"));
+            services.AddScoped(typeof(FlashcardDataRepository));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
