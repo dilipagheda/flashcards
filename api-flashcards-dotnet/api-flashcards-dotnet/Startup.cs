@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using api_flashcards_dotnet.Data;
+using api_flashcards_dotnet.Profiles;
+using AutoMapper;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -31,6 +33,9 @@ namespace api_flashcards_dotnet
             services.AddDbContext<FlashcardDbContext>(options =>
                 options.UseSqlite("Data Source=flashcards.db"));
             services.AddScoped(typeof(FlashcardDataRepository));
+
+
+            services.AddAutoMapper(typeof(Startup));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
