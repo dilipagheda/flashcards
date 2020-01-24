@@ -3,6 +3,8 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "api-flashcards-dotnet", "api-flashcards-dotnet\api-flashcards-dotnet.csproj", "{3E38A095-516B-48BE-9BCA-AA9048B651FC}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IntegrationTests", "IntegrationTests\IntegrationTests.csproj", "{4E7836CA-5735-4F87-89E6-F628DA1C9744}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -13,5 +15,9 @@ Global
 		{3E38A095-516B-48BE-9BCA-AA9048B651FC}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3E38A095-516B-48BE-9BCA-AA9048B651FC}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3E38A095-516B-48BE-9BCA-AA9048B651FC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4E7836CA-5735-4F87-89E6-F628DA1C9744}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4E7836CA-5735-4F87-89E6-F628DA1C9744}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4E7836CA-5735-4F87-89E6-F628DA1C9744}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4E7836CA-5735-4F87-89E6-F628DA1C9744}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
