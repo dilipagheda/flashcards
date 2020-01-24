@@ -39,6 +39,51 @@ namespace UnitTests
             }
         }
 
+        [Fact]
+        public async Task AddDeck_Adds_And_Returns_New_DeckAsync()
+        {
+            //Arrange
+            var mockMapper = new Mock<IMapper>();
+            mockMapper.Setup(x => x.Map<DeckResponse>(It.IsAny<Deck>())).Returns((Deck deck) =>
+           {
+               return new DeckResponse()
+               {
+                   Id = deck.Id,
+                   Name = deck.Name
+               };
+           });
+
+            DeckRequest newDeckRequest = new DeckRequest()
+            {
+                Name = "ASP.NET Core"
+            };
+            var mockRepository = new Mock<IFlashcardDataRepository>();
+            mockRepository.Setup(x => x.AddDeck(newDeckRequest.Name)).Returns((string deckName) => {
+
+                Deck deck = new Deck
+                {
+                    Id = GetFakeDecks().Count + 1,
+                    Name = deckName
+                };
+
+                return Task.FromResult<Deck>(deck);
+            });
+
+
+            using (DecksController decksController = new DecksController(mockRepository.Object, mockMapper.Object))
+            {
+                //Act
+                var result = await decksController.AddDeck(newDeckRequest);
+
+                //Assert
+                var okObjectResult = Assert.IsType<CreatedAtActionResult>(result);
+                var returnDeck = Assert.IsType<DeckResponse>(okObjectResult.Value);
+                Assert.Equal("ASP.NET Core", returnDeck.Name);
+                Assert.IsType<int>(returnDeck.Id);
+                Assert.True(returnDeck.Id > 0);
+            }
+        }
+
         private List<DeckResponse> GetFakeDecks()
         {
             return new List<DeckResponse>()
