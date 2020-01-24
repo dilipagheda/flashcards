@@ -32,7 +32,7 @@ namespace api_flashcards_dotnet
             services.AddControllers();
             services.AddDbContext<FlashcardDbContext>(options =>
                 options.UseSqlite("Data Source=flashcards.db"));
-            services.AddScoped(typeof(FlashcardDataRepository));
+            services.AddScoped<IFlashcardDataRepository, FlashcardDataRepository>();
 
 
             services.AddAutoMapper(typeof(Startup));
