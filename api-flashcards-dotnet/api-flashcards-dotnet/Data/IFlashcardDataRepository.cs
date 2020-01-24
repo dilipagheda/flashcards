@@ -7,7 +7,7 @@ namespace api_flashcards_dotnet.Data
 {
     public interface IFlashcardDataRepository
     {
-        public Task AddDeck(string deckName);
+        public Task<Deck> AddDeck(string deckName);
 
         public Task<List<Deck>> GetAllDecks();
     }

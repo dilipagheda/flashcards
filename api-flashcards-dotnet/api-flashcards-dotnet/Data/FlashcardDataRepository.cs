@@ -16,7 +16,7 @@ namespace api_flashcards_dotnet.Data
             _context = context;
         }
 
-        public async Task AddDeck(string deckName)
+        public async Task<Deck> AddDeck(string deckName)
         {
             Deck deck = new Deck()
             {
@@ -24,6 +24,7 @@ namespace api_flashcards_dotnet.Data
             };
             _context.Decks.Add(deck);
             await _context.SaveChangesAsync();
+            return deck;
         }
 
         public async Task<List<Deck>> GetAllDecks()

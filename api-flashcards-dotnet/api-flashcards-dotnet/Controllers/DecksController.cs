@@ -37,10 +37,12 @@ namespace api_flashcards_dotnet.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult<Deck>> AddDeck([FromBody] Deck deck)
+        public async Task<IActionResult> AddDeck([FromBody] Deck deck)
         {
-            await _flashcardDataRepository.AddDeck(deck.Name);
-            return CreatedAtAction(nameof(Get), new { id = deck.Id }, deck); 
+            Deck _newDeck = await _flashcardDataRepository.AddDeck(deck.Name);
+            DeckResponse _deckResponse = _mapper.Map<DeckResponse>(_newDeck);
+
+            return CreatedAtAction(nameof(Get), new { id = deck.Id }, _deckResponse); 
         }
     }
 }
