@@ -16,17 +16,17 @@ namespace api_flashcards_dotnet.Controllers
     [Route("[controller]")]
     public class DecksController : Controller
     {
-        private readonly FlashcardDataRepository _flashcardDataRepository;
+        private readonly IFlashcardDataRepository _flashcardDataRepository;
         private readonly IMapper _mapper;
 
-        public DecksController(FlashcardDataRepository flashcardDataRepository, IMapper mapper)
+        public DecksController(IFlashcardDataRepository flashcardDataRepository, IMapper mapper)
         {
             _flashcardDataRepository = flashcardDataRepository;
             _mapper = mapper;
         }
 
         [HttpGet]
-        public async Task<ActionResult<List<Deck>>> Get()
+        public async Task<IActionResult> Get()
         {
             List<Deck> _decks = await _flashcardDataRepository.GetAllDecks();
 

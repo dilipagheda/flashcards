@@ -7,7 +7,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace api_flashcards_dotnet.Data
 {
-    public class FlashcardDataRepository
+    public class FlashcardDataRepository:IFlashcardDataRepository
     {
         private readonly FlashcardDbContext _context;
 
