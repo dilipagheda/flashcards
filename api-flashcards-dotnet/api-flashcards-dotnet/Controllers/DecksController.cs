@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using api_flashcards_dotnet.Data;
 using api_flashcards_dotnet.Dtos;
+using api_flashcards_dotnet.Dtos.Models;
 using api_flashcards_dotnet.Models;
 using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
@@ -14,7 +15,7 @@ namespace api_flashcards_dotnet.Controllers
 {
     [ApiController]
     [Route("[controller]")]
-    public class DecksController : Controller
+    public class DecksController : ControllerBase
     {
         private readonly IFlashcardDataRepository _flashcardDataRepository;
         private readonly IMapper _mapper;
@@ -31,18 +32,18 @@ namespace api_flashcards_dotnet.Controllers
             List<Deck> _decks = await _flashcardDataRepository.GetAllDecks();
 
 
-            List<DeckResponse> _decksResponse =_mapper.Map<List<DeckResponse>>(_decks);
+            DeckResponse _deckResponse =_mapper.Map<DeckResponse>(_decks);
 
-            return Ok(_decksResponse);
+            return Ok(_deckResponse);
         }
 
         [HttpPost]
         public async Task<IActionResult> AddDeck([FromBody] DeckRequest deckRequest)
         {
             Deck _newDeck = await _flashcardDataRepository.AddDeck(deckRequest.Name);
-            DeckResponse _deckResponse = _mapper.Map<DeckResponse>(_newDeck);
+            DeckResponseDto _deckResponseDto = _mapper.Map<DeckResponseDto>(_newDeck);
 
-            return CreatedAtAction(nameof(Get), new { id = _deckResponse.Id }, _deckResponse); 
+            return CreatedAtAction(nameof(Get), new { id = _deckResponseDto.Id }, _deckResponseDto); 
         }
 
         [HttpGet("{id:int:min(1)}")]
@@ -58,9 +59,9 @@ namespace api_flashcards_dotnet.Controllers
                 };
                 return NotFound(resp);
             }
-            DeckResponse _deckResponse = _mapper.Map<DeckResponse>(_deck);
+            DeckResponseDto _deckResponseDto = _mapper.Map<DeckResponseDto>(_deck);
 
-            return Ok(_deckResponse);
+            return Ok(_deckResponseDto);
         }
     }
 }
