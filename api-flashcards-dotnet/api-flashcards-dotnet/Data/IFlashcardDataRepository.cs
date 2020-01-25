@@ -10,5 +10,7 @@ namespace api_flashcards_dotnet.Data
         public Task<Deck> AddDeck(string deckName);
 
         public Task<List<Deck>> GetAllDecks();
+
+        public Task<Deck> GetDeckById(int id);
     }
 }

@@ -31,5 +31,10 @@ namespace api_flashcards_dotnet.Data
         {
            return await _context.Decks.ToListAsync();
         }
+
+        public async Task<Deck> GetDeckById(int id)
+        {
+            return await _context.Decks.FirstOrDefaultAsync(deck => deck.Id == id);
+        }
     }
 }
