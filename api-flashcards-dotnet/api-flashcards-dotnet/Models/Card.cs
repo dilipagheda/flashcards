@@ -12,6 +12,13 @@ namespace api_flashcards_dotnet.Models
         public string Name { get; set; }
         public int DeckId { get; set; }
         public Deck Deck { get; set; }
-        public List<Question> Questions { get; set; }
+
+        [Required]
+        [StringLength(500, MinimumLength = 5)]
+        public string QuestionText { get; set; }
+
+        [Required]
+        [StringLength(500, MinimumLength = 5)]
+        public string AnswerText { get; set; }
     }
 }
