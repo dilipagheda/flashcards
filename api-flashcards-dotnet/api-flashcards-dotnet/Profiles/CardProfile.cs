@@ -7,13 +7,14 @@ using AutoMapper;
 
 namespace api_flashcards_dotnet.Profiles
 {
-    public class DeckProfile:Profile
+    public class CardProfile:Profile
     {
-        public DeckProfile()
+        public CardProfile()
         {
-            CreateMap<Deck, DeckResponseDto>();
-            CreateMap<List<Deck>, DeckResponse>()
-                .ForMember(dest => dest.Decks, opt => opt.MapFrom(src => src));
+            CreateMap<Card, CardResponseDto>();
+            CreateMap<List<Card>, CardResponse>()
+                .ForMember(dest => dest.Cards, opt => opt.MapFrom(src => src));
+            
         }
     }
 }
