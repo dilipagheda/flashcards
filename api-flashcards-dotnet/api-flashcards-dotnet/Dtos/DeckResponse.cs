@@ -1,12 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using api_flashcards_dotnet.Models;
+﻿using System.Collections.Generic;
+using api_flashcards_dotnet.Dtos.Models;
 
 namespace api_flashcards_dotnet.Dtos
 {
     public class DeckResponse
     {
-        public int Id { get; set; }
-        public string Name { get; set; }
+        public List<DeckResponseDto> Decks { get; set; }
     }
 }
