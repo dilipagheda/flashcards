@@ -44,5 +44,23 @@ namespace api_flashcards_dotnet.Controllers
 
             return CreatedAtAction(nameof(Get), new { id = _deckResponse.Id }, _deckResponse); 
         }
+
+        [HttpGet("{id:int:min(1)}")]
+        public async Task<IActionResult> GetDeckById(int id)
+        {
+            Deck _deck = await _flashcardDataRepository.GetDeckById(id);
+
+            if(_deck==null)
+            {
+                var resp = new
+                {
+                    Error = $"Deck with Id {id} not found"
+                };
+                return NotFound(resp);
+            }
+            DeckResponse _deckResponse = _mapper.Map<DeckResponse>(_deck);
+
+            return Ok(_deckResponse);
+        }
     }
 }
