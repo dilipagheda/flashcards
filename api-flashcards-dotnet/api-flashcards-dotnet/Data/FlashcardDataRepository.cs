@@ -16,13 +16,31 @@ namespace api_flashcards_dotnet.Data
             _context = context;
         }
 
+        public async Task<Card> AddCardToDeck(int deckId, string cardName, string questionText, string answerText)
+        {
+            Deck deck = _context.Decks.FirstOrDefault(deck => deck.Id == deckId);
+
+            Card card = new Card()
+            {
+                Name = cardName,
+                QuestionText = questionText,
+                AnswerText = answerText,
+                DeckId = deckId,
+                Deck = deck
+            };
+
+            await _context.Cards.AddAsync(card);
+            await _context.SaveChangesAsync();
+            return card;
+        }
+
         public async Task<Deck> AddDeck(string deckName)
         {
             Deck deck = new Deck()
             {
                 Name = deckName
             };
-            _context.Decks.Add(deck);
+            await _context.Decks.AddAsync(deck);
             await _context.SaveChangesAsync();
             return deck;
         }
@@ -30,6 +48,11 @@ namespace api_flashcards_dotnet.Data
         public async Task<List<Deck>> GetAllDecks()
         {
            return await _context.Decks.ToListAsync();
+        }
+
+        public async Task<List<Card>> GetCardsByDeckId(int id)
+        {
+            return await _context.Cards.Where(card => card.DeckId == id).ToListAsync();
         }
 
         public async Task<Deck> GetDeckById(int id)
