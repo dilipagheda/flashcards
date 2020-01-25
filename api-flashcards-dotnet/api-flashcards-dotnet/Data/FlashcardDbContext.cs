@@ -12,6 +12,5 @@ namespace api_flashcards_dotnet.Data
 
         public DbSet<Deck> Decks { get; set; }
         public DbSet<Card> Cards { get; set; }
-        public DbSet<Question> Questions { get; set; }
     }
 }
