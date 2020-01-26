@@ -32,7 +32,6 @@ namespace UnitTests
         [Fact]
         public async Task Get_Method_Returns_Ok()
         {
-
             //Arrange
             var mockRepository = new Mock<IFlashcardDataRepository>();
             mockRepository.Setup(x => x.GetAllDecks()).Returns(Task.FromResult(GetFakeDecks()));
@@ -82,6 +81,39 @@ namespace UnitTests
             Assert.Equal("ASP.NET Core", returnDeck.Name);
             Assert.IsType<int>(returnDeck.Id);
             Assert.True(returnDeck.Id > 0);
+        }
+
+        [Fact]
+        public async Task GetDeckById_Returns_NotFound_When_Deck_NotExist()
+        {
+            //Arrange
+            var mockRepository = new Mock<IFlashcardDataRepository>();
+            mockRepository.Setup(x => x.GetDeckById(1)).Returns((int id) => Task.FromResult<Deck>(null));
+
+            DecksController decksController = new DecksController(mockRepository.Object, iMapper);
+
+            //Act
+            var result = await decksController.GetDeckById(1);
+            var notFoundResult = Assert.IsType<NotFoundObjectResult>(result);
+            var returnedResponse = Assert.IsType<ErrorResponse>(notFoundResult.Value);
+            Assert.Equal("Deck with Id 1 not found", returnedResponse.Error);
+        }
+
+        [Fact]
+        public async Task GetDeckById_Returns_ValidResponse_When_Deck_Exist()
+        {
+            //Arrange
+            var mockRepository = new Mock<IFlashcardDataRepository>();
+            mockRepository.Setup(x => x.GetDeckById(1)).Returns( (int id) => Task.FromResult(GetFakeDecks().Find(deck => deck.Id == id)));
+
+            DecksController decksController = new DecksController(mockRepository.Object, iMapper);
+
+            //Act
+            var result = await decksController.GetDeckById(1);
+            var okObjectResult = Assert.IsType<OkObjectResult>(result);
+            var returnedResponse = Assert.IsType<DeckResponseDto>(okObjectResult.Value);
+            Assert.Equal("JavaScript", returnedResponse.Name);
+            Assert.Equal(1, returnedResponse.Id);
         }
 
         private List<Deck> GetFakeDecks()
