@@ -9,56 +9,58 @@ using api_flashcards_dotnet.Data;
 using System.Threading.Tasks;
 using api_flashcards_dotnet.Controllers;
 using Microsoft.AspNetCore.Mvc;
+using api_flashcards_dotnet.Dtos.Models;
 
 namespace UnitTests
 {
     public class DecksControllerTests
     {
+        private readonly IMapper iMapper;
 
-        [Fact]
-        public async Task Get_Method_Returns_OkAsync()
+        public DecksControllerTests()
         {
             //Arrange
-            var mockMapper = new Mock<IMapper>();
-            mockMapper.Setup(x => x.Map<List<DeckResponse>>(It.IsAny<List<Deck>>()))
-                .Returns(GetFakeDecks());
+            var config = new MapperConfiguration(cfg => {
+                cfg.CreateMap<Deck, DeckResponseDto>();
+                cfg.CreateMap<List<Deck>, DeckResponse>()
+                    .ForMember(dest => dest.Decks, opt => opt.MapFrom(src => src));
+            });
+            iMapper = config.CreateMapper();
 
-            var mockRepository = new Mock<IFlashcardDataRepository>();
-            mockRepository.Setup(x => x.GetAllDecks()).Returns(Task.FromResult<List<Deck>>(new List<Deck>()));
-
-
-            using (DecksController decksController = new DecksController(mockRepository.Object, mockMapper.Object))
-            {
-                //Act
-                var result = await decksController.Get();
-
-                //Assert
-                var okObjectResult = Assert.IsType<OkObjectResult>(result);
-                var returnDecks = Assert.IsType<List<DeckResponse>>(okObjectResult.Value);
-                Assert.Equal(2, returnDecks.Count);
-            }
         }
 
         [Fact]
-        public async Task AddDeck_Adds_And_Returns_New_DeckAsync()
+        public async Task Get_Method_Returns_Ok()
+        {
+
+            //Arrange
+            var mockRepository = new Mock<IFlashcardDataRepository>();
+            mockRepository.Setup(x => x.GetAllDecks()).Returns(Task.FromResult(GetFakeDecks()));
+
+            DecksController decksController = new DecksController(mockRepository.Object, iMapper);
+
+            //Act
+            var result = await decksController.Get();
+
+            //Assert
+            var okObjectResult = Assert.IsType<OkObjectResult>(result);
+            var returnDecks = Assert.IsType<DeckResponse>(okObjectResult.Value);
+            Assert.Equal(2, returnDecks.Decks.Count);
+        }
+
+        [Fact]
+        public async Task AddDeck_Adds_And_Returns_New_Deck()
         {
             //Arrange
-            var mockMapper = new Mock<IMapper>();
-            mockMapper.Setup(x => x.Map<DeckResponse>(It.IsAny<Deck>())).Returns((Deck deck) =>
-           {
-               return new DeckResponse()
-               {
-                   Id = deck.Id,
-                   Name = deck.Name
-               };
-           });
+
 
             DeckRequest newDeckRequest = new DeckRequest()
             {
                 Name = "ASP.NET Core"
             };
             var mockRepository = new Mock<IFlashcardDataRepository>();
-            mockRepository.Setup(x => x.AddDeck(newDeckRequest.Name)).Returns((string deckName) => {
+            mockRepository.Setup(x => x.AddDeck(newDeckRequest.Name)).Returns((string deckName) =>
+            {
 
                 Deck deck = new Deck
                 {
@@ -70,35 +72,34 @@ namespace UnitTests
             });
 
 
-            using (DecksController decksController = new DecksController(mockRepository.Object, mockMapper.Object))
-            {
-                //Act
-                var result = await decksController.AddDeck(newDeckRequest);
+            DecksController decksController = new DecksController(mockRepository.Object, iMapper);
+            //Act
+            var result = await decksController.AddDeck(newDeckRequest);
 
-                //Assert
-                var okObjectResult = Assert.IsType<CreatedAtActionResult>(result);
-                var returnDeck = Assert.IsType<DeckResponse>(okObjectResult.Value);
-                Assert.Equal("ASP.NET Core", returnDeck.Name);
-                Assert.IsType<int>(returnDeck.Id);
-                Assert.True(returnDeck.Id > 0);
-            }
+            //Assert
+            var okObjectResult = Assert.IsType<CreatedAtActionResult>(result);
+            var returnDeck = Assert.IsType<DeckResponseDto>(okObjectResult.Value);
+            Assert.Equal("ASP.NET Core", returnDeck.Name);
+            Assert.IsType<int>(returnDeck.Id);
+            Assert.True(returnDeck.Id > 0);
         }
 
-        private List<DeckResponse> GetFakeDecks()
+        private List<Deck> GetFakeDecks()
         {
-            return new List<DeckResponse>()
+            return new List<Deck>()
                 {
-                    new DeckResponse()
+                    new Deck()
                     {
                         Id = 1,
                         Name = "JavaScript"
                     },
-                    new DeckResponse()
+                    new Deck()
                     {
                         Id = 2,
                         Name = "C#"
                     }
                 };
         }
+
     }
 }
