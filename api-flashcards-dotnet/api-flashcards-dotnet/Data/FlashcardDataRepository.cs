@@ -49,6 +49,11 @@ namespace api_flashcards_dotnet.Data
            return await _context.Decks.ToListAsync();
         }
 
+        public async Task<Card> GetCardFromDeckByCardId(int deckId, int cardId)
+        {
+            return await _context.Cards.FirstOrDefaultAsync(card => card.DeckId == deckId && card.Id == cardId);
+        }
+
         public async Task<List<Card>> GetCardsByDeckId(int id)
         {
             return await _context.Cards.Where(card => card.DeckId == id).ToListAsync();
