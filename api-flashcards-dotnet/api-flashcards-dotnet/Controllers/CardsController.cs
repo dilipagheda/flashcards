@@ -43,7 +43,18 @@ namespace api_flashcards_dotnet.Controllers
 
             CardResponseDto _cardResponseDto = _mapper.Map<CardResponseDto>(_card);
 
+            return CreatedAtAction(nameof(GetCardFromDeckById), new { id , cardId = _cardResponseDto.Id }, _cardResponseDto);
+        }
+
+        [HttpGet("{cardId}")]
+        public async Task<IActionResult> GetCardFromDeckById(int id, int cardId)
+        {
+            Card _card = await _flashcardDataRepository.GetCardFromDeckByCardId(id, cardId);
+
+            CardResponseDto _cardResponseDto = _mapper.Map<CardResponseDto>(_card);
+
             return Ok(_cardResponseDto);
         }
+
     }
 }
