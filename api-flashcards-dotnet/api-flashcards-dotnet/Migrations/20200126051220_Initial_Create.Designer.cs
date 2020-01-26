@@ -8,8 +8,8 @@ using api_flashcards_dotnet.Data;
 namespace api_flashcards_dotnet.Migrations
 {
     [DbContext(typeof(FlashcardDbContext))]
-    [Migration("20200125121700_Removed_Questions")]
-    partial class Removed_Questions
+    [Migration("20200126051220_Initial_Create")]
+    partial class Initial_Create
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -30,11 +30,6 @@ namespace api_flashcards_dotnet.Migrations
 
                     b.Property<int>("DeckId")
                         .HasColumnType("INTEGER");
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasColumnType("TEXT")
-                        .HasMaxLength(150);
 
                     b.Property<string>("QuestionText")
                         .IsRequired()

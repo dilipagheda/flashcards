@@ -16,13 +16,12 @@ namespace api_flashcards_dotnet.Data
             _context = context;
         }
 
-        public async Task<Card> AddCardToDeck(int deckId, string cardName, string questionText, string answerText)
+        public async Task<Card> AddCardToDeck(int deckId, string questionText, string answerText)
         {
             Deck deck = _context.Decks.FirstOrDefault(deck => deck.Id == deckId);
 
             Card card = new Card()
             {
-                Name = cardName,
                 QuestionText = questionText,
                 AnswerText = answerText,
                 DeckId = deckId,

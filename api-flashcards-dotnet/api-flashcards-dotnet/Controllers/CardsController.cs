@@ -39,7 +39,7 @@ namespace api_flashcards_dotnet.Controllers
         [HttpPost]
         public async Task<IActionResult> Post(int id, [FromBody] CardRequest cardRequest)
         {
-            Card _card = await _flashcardDataRepository.AddCardToDeck(id, cardRequest.Name, cardRequest.QuestionText, cardRequest.AnswerText);
+            Card _card = await _flashcardDataRepository.AddCardToDeck(id, cardRequest.QuestionText, cardRequest.AnswerText);
 
             CardResponseDto _cardResponseDto = _mapper.Map<CardResponseDto>(_card);
 

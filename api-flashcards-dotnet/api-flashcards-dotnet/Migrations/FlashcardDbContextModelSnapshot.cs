@@ -29,11 +29,6 @@ namespace api_flashcards_dotnet.Migrations
                     b.Property<int>("DeckId")
                         .HasColumnType("INTEGER");
 
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasColumnType("TEXT")
-                        .HasMaxLength(150);
-
                     b.Property<string>("QuestionText")
                         .IsRequired()
                         .HasColumnType("TEXT")

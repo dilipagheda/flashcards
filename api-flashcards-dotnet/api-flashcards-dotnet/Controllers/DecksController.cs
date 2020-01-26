@@ -43,7 +43,7 @@ namespace api_flashcards_dotnet.Controllers
             Deck _newDeck = await _flashcardDataRepository.AddDeck(deckRequest.Name);
             DeckResponseDto _deckResponseDto = _mapper.Map<DeckResponseDto>(_newDeck);
 
-            return CreatedAtAction(nameof(Get), new { id = _deckResponseDto.Id }, _deckResponseDto); 
+            return CreatedAtAction(nameof(GetDeckById), new { id = _deckResponseDto.Id }, _deckResponseDto); 
         }
 
         [HttpGet("{id:int:min(1)}")]

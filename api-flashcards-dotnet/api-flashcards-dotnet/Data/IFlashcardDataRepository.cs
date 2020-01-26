@@ -15,6 +15,6 @@ namespace api_flashcards_dotnet.Data
 
         public Task<List<Card>> GetCardsByDeckId(int deckId);
 
-        public Task<Card> AddCardToDeck(int deckId, string cardName, string questionText, string answerText);
+        public Task<Card> AddCardToDeck(int deckId, string questionText, string answerText);
     }
 }

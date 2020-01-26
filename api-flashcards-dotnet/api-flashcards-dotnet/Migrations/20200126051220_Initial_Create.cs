@@ -2,7 +2,7 @@
 
 namespace api_flashcards_dotnet.Migrations
 {
-    public partial class InitialCreate : Migration
+    public partial class Initial_Create : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -25,8 +25,9 @@ namespace api_flashcards_dotnet.Migrations
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("Sqlite:Autoincrement", true),
-                    Name = table.Column<string>(maxLength: 150, nullable: false),
-                    DeckId = table.Column<int>(nullable: false)
+                    DeckId = table.Column<int>(nullable: false),
+                    QuestionText = table.Column<string>(maxLength: 500, nullable: false),
+                    AnswerText = table.Column<string>(maxLength: 500, nullable: false)
                 },
                 constraints: table =>
                 {
@@ -39,43 +40,14 @@ namespace api_flashcards_dotnet.Migrations
                         onDelete: ReferentialAction.Cascade);
                 });
 
-            migrationBuilder.CreateTable(
-                name: "Questions",
-                columns: table => new
-                {
-                    Id = table.Column<int>(nullable: false)
-                        .Annotation("Sqlite:Autoincrement", true),
-                    QuestionText = table.Column<string>(maxLength: 500, nullable: false),
-                    AnswerText = table.Column<string>(maxLength: 500, nullable: false),
-                    CardId = table.Column<int>(nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Questions", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_Questions_Cards_CardId",
-                        column: x => x.CardId,
-                        principalTable: "Cards",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
             migrationBuilder.CreateIndex(
                 name: "IX_Cards_DeckId",
                 table: "Cards",
                 column: "DeckId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Questions_CardId",
-                table: "Questions",
-                column: "CardId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.DropTable(
-                name: "Questions");
-
             migrationBuilder.DropTable(
                 name: "Cards");
 
