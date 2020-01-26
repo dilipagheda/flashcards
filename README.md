@@ -6,6 +6,8 @@ This repo consists of implementation of flashcards projects on different platfor
 
 [Project 2 - Flashcards for Web: .NET Core 3.0 MVC, EF Core, SQL Server](#user-content-project-2-flashcards-for-web---implementation-using-net-core-30-mvc-ef-core-and-sql-server)
 
+[Project 3 - Flashcards Restful APIs using .NET Core 3.0, EF Core, SQLite3](#user-content-project-3-flashcards-restful-apis---implementation-using-net-core-30-mvc-ef-core-and-sqlite-db)
+
 # Project 1 - Flashcards Mobile App: ReactNative
 ## Foldername: mobile-flashcards-reactnative
 This is the 3rd Project as part of Udacity React Nanodegree. It is about creating a React Native app for Mobile flashcards. 
@@ -62,5 +64,52 @@ https://www.quackit.com/sql_server/mac/install_sql_server_on_a_mac.cfm
 ## Testing
 - Unit Testing is done through xUnit
 - E2E Testing is done through Cypress
+
+# Project-3: Flashcards Restful APIs - Implementation using .NET Core 3.0 MVC, EF Core and SQLite Db
+## Foldername: api-flashcards-dotnet
+The aim of this project is to build Restful APIs using .NET Core 3.0 MVC, EF Core and SQLite Db. It is using standard pattern of MVC using .Net Core 3.0.
+
+Postman collection is also included in the project for running locally.
+
+At the moment, there are below APIs.
+
+- GET https://localhost:5001/decks
+  
+  get all decks
+  
+- POST https://localhost:5001/decks
+  
+  create new deck. it supports only one deck at a  time.
+  
+- GET https://localhost:5001/decks/{id}
+  
+  get a deck by deckId
+  
+- POST https://localhost:5001/decks/{id}/cards
+  
+  create a new card for a specific deck
+  
+- GET https://localhost:5001/decks/{id}/cards
+  
+  get all cards for a specific deck
+  
+- GET https://localhost:5001/decks/{id}/Cards/{id}
+  
+  get a specific card for a specific deck
+
+## How to run this project
+- You need to install VS studio, SQLite3 and .NET Core Runtime as a pre-requisite
+- Once Installed, simply open the project and run it by pressing 'play' button in VS Studio
+- From command line, you can run `dotnet watch run` to run the project using Krestrel web server.
+
+## Skills used
+- .NET Core 3.0 MVC
+- C#
+- Entity Framework Core
+- SQLite3
+- Dependancy Injection
+- Automapper
+- xUnit
+- Integration testing using In-memory localhost and db
 
 
