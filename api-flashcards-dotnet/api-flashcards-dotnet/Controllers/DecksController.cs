@@ -53,7 +53,7 @@ namespace api_flashcards_dotnet.Controllers
 
             if(_deck==null)
             {
-                var resp = new
+                var resp = new ErrorResponse()
                 {
                     Error = $"Deck with Id {id} not found"
                 };
