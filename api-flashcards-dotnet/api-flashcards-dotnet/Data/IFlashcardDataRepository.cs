@@ -18,5 +18,7 @@ namespace api_flashcards_dotnet.Data
         public Task<Card> AddCardToDeck(int deckId, string questionText, string answerText);
 
         public Task<Card> GetCardFromDeckByCardId(int deckId, int cardId);
+
+        public Task<bool> DeleteDeckById(int deckId);
     }
 }

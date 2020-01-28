@@ -63,5 +63,23 @@ namespace api_flashcards_dotnet.Controllers
 
             return Ok(_deckResponseDto);
         }
+
+        [HttpDelete("{id:int:min(1)}")]
+        public async Task<IActionResult> DeleteDeckById(int id)
+        {
+            bool result = await _flashcardDataRepository.DeleteDeckById(id);
+            if(!result)
+            {
+                var resp = new ErrorResponse()
+                {
+                    Error = $"Deck with Id {id} not found"
+                };
+                return NotFound(resp);
+            }
+            else
+            {
+                return NoContent();
+            }
+        }
     }
 }

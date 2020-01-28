@@ -63,5 +63,20 @@ namespace api_flashcards_dotnet.Data
         {
             return await _context.Decks.FirstOrDefaultAsync(deck => deck.Id == id);
         }
+
+        public async Task<bool> DeleteDeckById(int id)
+        {
+            Deck deck = await _context.Decks.FirstOrDefaultAsync(deck => deck.Id == id);
+            if(deck != null)
+            {
+                _context.Decks.Remove(deck);
+                await _context.SaveChangesAsync();
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
     }
 }
