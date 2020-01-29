@@ -44,12 +44,14 @@ namespace IntegrationTests
                     new DeckResponseDto()
                     {
                         Id = 1,
-                        Name = "JavaScript"
+                        Name = "JavaScript",
+                        TotalCards = 0
                     },
                     new DeckResponseDto()
                     {
                         Id=2,
-                        Name="C#"
+                        Name="C#",
+                        TotalCards = 0
                     }
                 }
               );
@@ -81,17 +83,20 @@ namespace IntegrationTests
                     new DeckResponseDto()
                     {
                         Id = 1,
-                        Name = "JavaScript"
+                        Name = "JavaScript",
+                        TotalCards = 0
                     },
                     new DeckResponseDto()
                     {
                         Id=2,
-                        Name="C#"
+                        Name="C#",
+                        TotalCards = 0
                     },
                     new DeckResponseDto()
                     {
                         Id=3,
-                        Name="React"
+                        Name="React",
+                        TotalCards = 0
                     }
                 }
               );

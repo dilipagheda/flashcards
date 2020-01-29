@@ -46,7 +46,9 @@ namespace api_flashcards_dotnet.Data
 
         public async Task<List<Deck>> GetAllDecks()
         {
-           return await _context.Decks.ToListAsync();
+           return await _context.Decks
+                            .Include(deck => deck.Cards)
+                            .ToListAsync();
         }
 
         public async Task<Card> GetCardFromDeckByCardId(int deckId, int cardId)
@@ -61,7 +63,9 @@ namespace api_flashcards_dotnet.Data
 
         public async Task<Deck> GetDeckById(int id)
         {
-            return await _context.Decks.FirstOrDefaultAsync(deck => deck.Id == id);
+            return await _context.Decks
+                    .Include(deck => deck.Cards)
+                    .FirstOrDefaultAsync(deck => deck.Id == id);
         }
 
         public async Task<bool> DeleteDeckById(int id)

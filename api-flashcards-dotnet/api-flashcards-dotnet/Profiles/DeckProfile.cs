@@ -11,7 +11,8 @@ namespace api_flashcards_dotnet.Profiles
     {
         public DeckProfile()
         {
-            CreateMap<Deck, DeckResponseDto>();
+            CreateMap<Deck, DeckResponseDto>()
+                .ForMember(dest => dest.TotalCards, opt => opt.MapFrom( src => src.Cards.Count));
             CreateMap<List<Deck>, DeckResponse>()
                 .ForMember(dest => dest.Decks, opt => opt.MapFrom(src => src));
         }
