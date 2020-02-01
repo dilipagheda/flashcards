@@ -3,12 +3,20 @@ using System.Net;
 using System.Net.Http;
 using System.Threading.Tasks;
 using api_flashcards_dotnet;
+using api_flashcards_dotnet.Data;
 using api_flashcards_dotnet.Dtos;
 using api_flashcards_dotnet.Dtos.Models;
-using api_flashcards_dotnet.Models;
 using FluentAssertions;
 using Flurl.Http;
+using Microsoft.AspNetCore.Mvc.Testing;
 using Xunit;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Logging;
+using System;
+using api_flashcards_dotnet.Models;
+using System.Linq;
+using IntegrationTests.Fixtures;
 
 namespace IntegrationTests
 {
@@ -16,18 +24,64 @@ namespace IntegrationTests
     {
 
         private readonly CustomWebApplicationFactory<Startup> _factory;
+        private HttpClient _client;
 
         public DecksControllerTests(CustomWebApplicationFactory<Startup> factory)
         {
             _factory = factory;
-        }
+            _client = _factory.WithWebHostBuilder(builder =>
+            {
+                builder.ConfigureServices(services =>
+                {
+                    var serviceProvider = services.BuildServiceProvider();
 
+                    using (var scope = serviceProvider.CreateScope())
+                    {
+                        var scopedServices = scope.ServiceProvider;
+                        var db = scopedServices
+                            .GetRequiredService<FlashcardDbContext>();
+                        var logger = scopedServices
+                            .GetRequiredService<ILogger<DecksControllerTests>>();
+
+                        db.Database.EnsureDeleted();
+
+                        // Ensure the database is created.
+                        db.Database.EnsureCreated();
+
+                        try
+                        {
+                            // Seed the database with test data.
+                            db.Decks.Add(new Deck()
+                            {
+                                Id = 1,
+                                Name = "JavaScript"
+                            });
+                            db.Decks.Add(new Deck()
+                            {
+                                Id = 2,
+                                Name = "C#"
+                            });
+                            db.SaveChanges();
+                        }
+                        catch (Exception ex)
+                        {
+                            logger.LogError(ex, "An error occurred seeding the " +
+                                "database with test messages. Error: {Message}", ex.Message);
+                        }
+                    }
+                });
+            })
+            .CreateClient(new WebApplicationFactoryClientOptions
+            {
+                AllowAutoRedirect = false
+            });
+        }
 
         [Fact]
         public async Task Get_Decks_ReturnSuccess_With_ValidResponse()
         {
             // Arrange
-            var _client = _factory.CreateClient();
+            //var _client = _factory.CreateClient();
 
 
             FlurlClient flurlClient = new FlurlClient(_client);
@@ -61,7 +115,7 @@ namespace IntegrationTests
         public async Task Add_NewDeck_ReturnsSuccess_Adds_NewDeck()
         {
             // Arrange
-            var _client = _factory.CreateClient();
+           //var _client = _factory.CreateClient();
 
 
             FlurlClient flurlClient = new FlurlClient(_client);
@@ -100,9 +154,11 @@ namespace IntegrationTests
                     }
                 }
               );
-            //Clean up using Delete call
-            _resp = await flurlClient.Request("/decks/3").DeleteAsync();
-            _resp.IsSuccessStatusCode.Should().BeTrue("Failed to delete deck id 3");
+            ////Clean up using Delete call
+            //_resp = await flurlClient.Request("/decks/3").DeleteAsync();
+            //_resp.IsSuccessStatusCode.Should().BeTrue("Failed to delete deck id 3");
+
+
 
         }
     }

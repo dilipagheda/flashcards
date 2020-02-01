@@ -22,4 +22,7 @@
   <ItemGroup>
     <ProjectReference Include="..\api-flashcards-dotnet\api-flashcards-dotnet.csproj" />
   </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Fixtures\" />
+  </ItemGroup>
 </Project>
