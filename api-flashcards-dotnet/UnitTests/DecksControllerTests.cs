@@ -20,7 +20,8 @@ namespace UnitTests
         public DecksControllerTests()
         {
             //Arrange
-            var config = new MapperConfiguration(cfg => {
+            var config = new MapperConfiguration(cfg =>
+            {
                 cfg.CreateMap<Deck, DeckResponseDto>();
                 cfg.CreateMap<List<Deck>, DeckResponse>()
                     .ForMember(dest => dest.Decks, opt => opt.MapFrom(src => src));
@@ -104,7 +105,7 @@ namespace UnitTests
         {
             //Arrange
             var mockRepository = new Mock<IFlashcardDataRepository>();
-            mockRepository.Setup(x => x.GetDeckById(1)).Returns( (int id) => Task.FromResult(GetFakeDecks().Find(deck => deck.Id == id)));
+            mockRepository.Setup(x => x.GetDeckById(1)).Returns((int id) => Task.FromResult(GetFakeDecks().Find(deck => deck.Id == id)));
 
             DecksController decksController = new DecksController(mockRepository.Object, iMapper);
 
@@ -123,7 +124,7 @@ namespace UnitTests
         {
             //Arrange
             var mockRepository = new Mock<IFlashcardDataRepository>();
-            mockRepository.Setup(x => x.DeleteDeckById(10)).Returns( (int id) => Task.FromResult<bool>(false));
+            mockRepository.Setup(x => x.DeleteDeckById(10)).Returns((int id) => Task.FromResult<bool>(false));
 
             DecksController decksController = new DecksController(mockRepository.Object, iMapper);
 
@@ -134,7 +135,7 @@ namespace UnitTests
             var notFoundObjectResult = Assert.IsType<NotFoundObjectResult>(result);
             var errorResponse = Assert.IsType<ErrorResponse>(notFoundObjectResult.Value);
             Assert.Equal("Deck with Id 10 not found", errorResponse.Error);
-            
+
         }
 
         [Fact]
