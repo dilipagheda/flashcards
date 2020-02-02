@@ -51,8 +51,6 @@ namespace UnitTests
         public async Task AddDeck_Adds_And_Returns_New_Deck()
         {
             //Arrange
-
-
             DeckRequest newDeckRequest = new DeckRequest()
             {
                 Name = "ASP.NET Core"
@@ -94,6 +92,8 @@ namespace UnitTests
 
             //Act
             var result = await decksController.GetDeckById(1);
+
+            //Assert
             var notFoundResult = Assert.IsType<NotFoundObjectResult>(result);
             var returnedResponse = Assert.IsType<ErrorResponse>(notFoundResult.Value);
             Assert.Equal("Deck with Id 1 not found", returnedResponse.Error);
@@ -110,12 +110,87 @@ namespace UnitTests
 
             //Act
             var result = await decksController.GetDeckById(1);
+
+            //Assert
             var okObjectResult = Assert.IsType<OkObjectResult>(result);
             var returnedResponse = Assert.IsType<DeckResponseDto>(okObjectResult.Value);
             Assert.Equal("JavaScript", returnedResponse.Name);
             Assert.Equal(1, returnedResponse.Id);
         }
 
+        [Fact]
+        public async Task DeleteDeck_Returns_NotFound_When_Deck_NotExist()
+        {
+            //Arrange
+            var mockRepository = new Mock<IFlashcardDataRepository>();
+            mockRepository.Setup(x => x.DeleteDeckById(10)).Returns( (int id) => Task.FromResult<bool>(false));
+
+            DecksController decksController = new DecksController(mockRepository.Object, iMapper);
+
+            //Act
+            var result = await decksController.DeleteDeckById(10);
+
+            //Assert
+            var notFoundObjectResult = Assert.IsType<NotFoundObjectResult>(result);
+            var errorResponse = Assert.IsType<ErrorResponse>(notFoundObjectResult.Value);
+            Assert.Equal("Deck with Id 10 not found", errorResponse.Error);
+            
+        }
+
+        [Fact]
+        public async Task DeleteDeck_Returns_204_When_Deck_Exists()
+        {
+            //Arrange
+            var mockRepository = new Mock<IFlashcardDataRepository>();
+            mockRepository.Setup(x => x.DeleteDeckById(11)).Returns((int id) => Task.FromResult<bool>(true));
+
+            DecksController decksController = new DecksController(mockRepository.Object, iMapper);
+
+            //Act
+            var result = await decksController.DeleteDeckById(11);
+
+            //Assert
+            var noContentResult = Assert.IsType<NoContentResult>(result);
+
+        }
+
+        [Fact]
+        public async Task UpdateDeck_Returns_NotFound_When_Deck_NotExist()
+        {
+            //Arrange
+            var mockRepository = new Mock<IFlashcardDataRepository>();
+            mockRepository.Setup(x => x.UpdateDeckNameById(10, "any")).Returns((int id, string name) => Task.FromResult(false));
+
+            DecksController decksController = new DecksController(mockRepository.Object, iMapper);
+
+            //Act
+            var result = await decksController.UpdateDeckById(10, new Deck { Name = "any" });
+
+            //Assert
+            var notFoundObjectResult = Assert.IsType<NotFoundObjectResult>(result);
+            var errorResponse = Assert.IsType<ErrorResponse>(notFoundObjectResult.Value);
+            Assert.Equal("Deck with Id 10 not found", errorResponse.Error);
+
+        }
+
+        [Fact]
+        public async Task UpdateDeck_Returns_204_When_Deck_Exists()
+        {
+            //Arrange
+            var mockRepository = new Mock<IFlashcardDataRepository>();
+            mockRepository.Setup(x => x.UpdateDeckNameById(11, "any")).Returns((int id, string name) => Task.FromResult(true));
+
+            DecksController decksController = new DecksController(mockRepository.Object, iMapper);
+
+            //Act
+            var result = await decksController.UpdateDeckById(11, new Deck { Name = "any" });
+
+            //Assert
+            var noContentResult = Assert.IsType<NoContentResult>(result);
+
+        }
+
+        //PRIVATE HELPER METHOD TO GET FAKE DECKS
         private List<Deck> GetFakeDecks()
         {
             return new List<Deck>()
@@ -132,6 +207,5 @@ namespace UnitTests
                     }
                 };
         }
-
     }
 }
