@@ -117,7 +117,7 @@ namespace api_flashcards_dotnet.Controllers
         }
 
         [HttpPut("{cardId}")]
-        public async Task<IActionResult> DeleteCardFromDeckById(int id, int cardId, [FromBody] Card card)
+        public async Task<IActionResult> UpdateCardFromDeckById(int id, int cardId, [FromBody] Card card)
         {
             bool isDeckExist = await _flashcardDataRepository.isDeckExist(id);
             if (!isDeckExist)
