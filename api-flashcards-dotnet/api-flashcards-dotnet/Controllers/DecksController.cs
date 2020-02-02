@@ -88,9 +88,9 @@ namespace api_flashcards_dotnet.Controllers
         }
 
         [HttpPut("{id:int:min(1)}")]
-        public async Task<IActionResult> UpdateDeckById(int id, [FromBody] Try _try)
+        public async Task<IActionResult> UpdateDeckById(int id, [FromBody] Deck deck)
         {
-            bool result = await _flashcardDataRepository.UpdateDeckNameById(id,_try.Name);
+            bool result = await _flashcardDataRepository.UpdateDeckNameById(id,deck.Name);
             if (!result)
             {
                 var resp = new ErrorResponse()
