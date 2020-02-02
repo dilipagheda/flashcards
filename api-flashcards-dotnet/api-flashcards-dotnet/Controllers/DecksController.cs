@@ -13,6 +13,11 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace api_flashcards_dotnet.Controllers
 {
+    public class Try
+    {
+        public string Name { get; set; }
+    }
+
     [ApiController]
     [Route("[controller]")]
     public class DecksController : ControllerBase
@@ -69,6 +74,24 @@ namespace api_flashcards_dotnet.Controllers
         {
             bool result = await _flashcardDataRepository.DeleteDeckById(id);
             if(!result)
+            {
+                var resp = new ErrorResponse()
+                {
+                    Error = $"Deck with Id {id} not found"
+                };
+                return NotFound(resp);
+            }
+            else
+            {
+                return NoContent();
+            }
+        }
+
+        [HttpPut("{id:int:min(1)}")]
+        public async Task<IActionResult> UpdateDeckById(int id, [FromBody] Try _try)
+        {
+            bool result = await _flashcardDataRepository.UpdateDeckNameById(id,_try.Name);
+            if (!result)
             {
                 var resp = new ErrorResponse()
                 {

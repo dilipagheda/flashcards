@@ -82,5 +82,20 @@ namespace api_flashcards_dotnet.Data
                 return false;
             }
         }
+
+        public async Task<bool> UpdateDeckNameById(int id, string name)
+        {
+            Deck deck = await _context.Decks.FirstOrDefaultAsync(deck => deck.Id == id);
+            if (deck != null)
+            {
+                deck.Name = name;
+                await _context.SaveChangesAsync();
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
     }
 }
