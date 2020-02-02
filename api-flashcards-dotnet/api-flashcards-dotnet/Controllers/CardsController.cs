@@ -29,6 +29,16 @@ namespace api_flashcards_dotnet.Controllers
         [HttpGet]
         public async Task<IActionResult> Get(int id)
         {
+            bool isDeckExist = await _flashcardDataRepository.isDeckExist(id);
+            if(!isDeckExist)
+            {
+                var resp = new ErrorResponse()
+                {
+                    Error = $"Deck with Id {id} not found"
+                };
+                return NotFound(resp);
+            }
+
             List<Card> _cards = await _flashcardDataRepository.GetCardsByDeckId(id);
 
             CardResponse _cardResponse = _mapper.Map<CardResponse>(_cards);
@@ -39,6 +49,16 @@ namespace api_flashcards_dotnet.Controllers
         [HttpPost]
         public async Task<IActionResult> Post(int id, [FromBody] CardRequest cardRequest)
         {
+            bool isDeckExist = await _flashcardDataRepository.isDeckExist(id);
+            if (!isDeckExist)
+            {
+                var resp = new ErrorResponse()
+                {
+                    Error = $"Deck with Id {id} not found"
+                };
+                return NotFound(resp);
+            }
+
             Card _card = await _flashcardDataRepository.AddCardToDeck(id, cardRequest.QuestionText, cardRequest.AnswerText);
 
             CardResponseDto _cardResponseDto = _mapper.Map<CardResponseDto>(_card);
@@ -49,6 +69,16 @@ namespace api_flashcards_dotnet.Controllers
         [HttpGet("{cardId}")]
         public async Task<IActionResult> GetCardFromDeckById(int id, int cardId)
         {
+            bool isDeckExist = await _flashcardDataRepository.isDeckExist(id);
+            if (!isDeckExist)
+            {
+                var resp = new ErrorResponse()
+                {
+                    Error = $"Deck with Id {id} not found"
+                };
+                return NotFound(resp);
+            }
+
             Card _card = await _flashcardDataRepository.GetCardFromDeckByCardId(id, cardId);
 
             CardResponseDto _cardResponseDto = _mapper.Map<CardResponseDto>(_card);
@@ -56,5 +86,63 @@ namespace api_flashcards_dotnet.Controllers
             return Ok(_cardResponseDto);
         }
 
+        [HttpDelete("{cardId}")]
+        public async Task<IActionResult> DeleteCardFromDeckById(int id, int cardId)
+        {
+            bool isDeckExist = await _flashcardDataRepository.isDeckExist(id);
+            if (!isDeckExist)
+            {
+                var resp = new ErrorResponse()
+                {
+                    Error = $"Deck with Id {id} not found"
+                };
+                return NotFound(resp);
+            }
+
+            bool result = await _flashcardDataRepository.DeleteCardFromDeckByCardId(id, cardId);
+
+            if (!result)
+            {
+                var resp = new ErrorResponse()
+                {
+                    Error = $"Card with Id {id} not found"
+                };
+                return NotFound(resp);
+            }
+            else
+            {
+                return NoContent();
+            }
+
+        }
+
+        [HttpPut("{cardId}")]
+        public async Task<IActionResult> DeleteCardFromDeckById(int id, int cardId, [FromBody] Card card)
+        {
+            bool isDeckExist = await _flashcardDataRepository.isDeckExist(id);
+            if (!isDeckExist)
+            {
+                var resp = new ErrorResponse()
+                {
+                    Error = $"Deck with Id {id} not found"
+                };
+                return NotFound(resp);
+            }
+
+            bool result = await _flashcardDataRepository.UpdateCardFromDeckByCardId(id, cardId, card.QuestionText, card.AnswerText);
+
+            if (!result)
+            {
+                var resp = new ErrorResponse()
+                {
+                    Error = $"Card with Id {id} not found"
+                };
+                return NotFound(resp);
+            }
+            else
+            {
+                return NoContent();
+            }
+        }
     }
 }

@@ -97,5 +97,42 @@ namespace api_flashcards_dotnet.Data
                 return false;
             }
         }
+
+        public async Task<bool> DeleteCardFromDeckByCardId(int deckId, int cardId)
+        {
+            Card card = await _context.Cards.FirstOrDefaultAsync(card => card.DeckId == deckId && card.Id == cardId);
+            if (card != null)
+            {
+                _context.Cards.Remove(card);
+                await _context.SaveChangesAsync();
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+
+        public async Task<bool> UpdateCardFromDeckByCardId(int deckId, int cardId, string questionText, string answerText)
+        {
+            Card card = await _context.Cards.FirstOrDefaultAsync(card => card.DeckId == deckId && card.Id == cardId);
+            if (card != null)
+            {
+                card.QuestionText = questionText;
+                card.AnswerText = answerText;
+                await _context.SaveChangesAsync();
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+
+        public async Task<bool> isDeckExist(int deckId)
+        {
+            Deck deck = await _context.Decks.FirstOrDefaultAsync(deck => deck.Id == deckId);
+            return (deck != null);
+        }
     }
 }
