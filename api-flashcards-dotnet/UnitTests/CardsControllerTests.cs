@@ -65,7 +65,7 @@ namespace UnitTests
             //Assert
             var notFoundObjectResult = Assert.IsType<NotFoundObjectResult>(result);
             var errorResponse = Assert.IsType<ErrorResponse>(notFoundObjectResult.Value);
-            Assert.Equal("Deck with Id 1 not found", errorResponse.Error);
+            Assert.Equal("Deck with Id 1 not found", errorResponse.Errors[0]);
         }
 
         [Fact]
@@ -87,7 +87,7 @@ namespace UnitTests
             //Assert
             var notFoundObjectResult = Assert.IsType<NotFoundObjectResult>(result);
             var errorResponse = Assert.IsType<ErrorResponse>(notFoundObjectResult.Value);
-            Assert.Equal("Deck with Id 1 not found", errorResponse.Error);
+            Assert.Equal("Deck with Id 1 not found", errorResponse.Errors[0]);
         }
 
         [Fact]
@@ -131,7 +131,7 @@ namespace UnitTests
             //Assert
             var notFoundObjectResult = Assert.IsType<NotFoundObjectResult>(result);
             var errorResponse = Assert.IsType<ErrorResponse>(notFoundObjectResult.Value);
-            Assert.Equal("Deck with Id 1 not found", errorResponse.Error);
+            Assert.Equal("Deck with Id 1 not found", errorResponse.Errors[0]);
         }
 
         [Fact]
@@ -170,7 +170,7 @@ namespace UnitTests
             //Assert
             var notFoundObjectResult = Assert.IsType<NotFoundObjectResult>(result);
             var errorResponse = Assert.IsType<ErrorResponse>(notFoundObjectResult.Value);
-            Assert.Equal("Deck with Id 1 not found", errorResponse.Error);
+            Assert.Equal("Deck with Id 1 not found", errorResponse.Errors[0]);
         }
 
         [Fact]
@@ -189,7 +189,7 @@ namespace UnitTests
             //Assert
             var notFoundObjectResult = Assert.IsType<NotFoundObjectResult>(result);
             var errorResponse = Assert.IsType<ErrorResponse>(notFoundObjectResult.Value);
-            Assert.Equal("Card with Id 1 not found", errorResponse.Error);
+            Assert.Equal("Card with Id 1 not found", errorResponse.Errors[0]);
         }
 
         [Fact]
@@ -232,7 +232,7 @@ namespace UnitTests
             //Assert
             var notFoundObjectResult = Assert.IsType<NotFoundObjectResult>(result);
             var errorResponse = Assert.IsType<ErrorResponse>(notFoundObjectResult.Value);
-            Assert.Equal("Deck with Id 1 not found", errorResponse.Error);
+            Assert.Equal("Deck with Id 1 not found", errorResponse.Errors[0]);
         }
 
         [Fact]
@@ -258,7 +258,7 @@ namespace UnitTests
             //Assert
             var notFoundObjectResult = Assert.IsType<NotFoundObjectResult>(result);
             var errorResponse = Assert.IsType<ErrorResponse>(notFoundObjectResult.Value);
-            Assert.Equal("Card with Id 1 not found", errorResponse.Error);
+            Assert.Equal("Card with Id 1 not found", errorResponse.Errors[0]);
         }
 
         [Fact]
