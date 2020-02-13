@@ -67,7 +67,10 @@ namespace api_flashcards_dotnet.Controllers
             {
                 var error = new ErrorResponse()
                 {
-                    Error = "Email is already in use"
+                    Errors = new List<string>()
+                    {
+                        "Email is already in use"
+                    }
                 };
                 return BadRequest(error);
             }
@@ -82,7 +85,10 @@ namespace api_flashcards_dotnet.Controllers
             var result = await _userManager.CreateAsync(userToCreate, _registerRequest.Password);
             if(!result.Succeeded)
             {
-                return BadRequest();
+                var error = new ErrorResponse();
+                error.Errors = result.Errors.Select(e => e.Description).ToList();
+
+                return BadRequest(error);
             }
             return Ok();
         }
