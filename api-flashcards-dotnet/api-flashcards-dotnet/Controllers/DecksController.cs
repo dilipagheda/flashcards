@@ -13,10 +13,6 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace api_flashcards_dotnet.Controllers
 {
-    public class Try
-    {
-        public string Name { get; set; }
-    }
 
     [ApiController]
     [Route("[controller]")]
