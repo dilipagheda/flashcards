@@ -34,7 +34,7 @@ namespace api_flashcards_dotnet.Controllers
             {
                 var resp = new ErrorResponse()
                 {
-                    Error = $"Deck with Id {id} not found"
+                    Errors = new List<string>() { $"Deck with Id {id} not found" }
                 };
                 return NotFound(resp);
             }
@@ -54,7 +54,7 @@ namespace api_flashcards_dotnet.Controllers
             {
                 var resp = new ErrorResponse()
                 {
-                    Error = $"Deck with Id {id} not found"
+                    Errors = new List<string>() { $"Deck with Id {id} not found" }
                 };
                 return NotFound(resp);
             }
@@ -74,7 +74,7 @@ namespace api_flashcards_dotnet.Controllers
             {
                 var resp = new ErrorResponse()
                 {
-                    Error = $"Deck with Id {id} not found"
+                    Errors = new List<string>() { $"Deck with Id {id} not found" }
                 };
                 return NotFound(resp);
             }
@@ -94,7 +94,7 @@ namespace api_flashcards_dotnet.Controllers
             {
                 var resp = new ErrorResponse()
                 {
-                    Error = $"Deck with Id {id} not found"
+                    Errors = new List<string>() { $"Deck with Id {id} not found" }
                 };
                 return NotFound(resp);
             }
@@ -105,7 +105,7 @@ namespace api_flashcards_dotnet.Controllers
             {
                 var resp = new ErrorResponse()
                 {
-                    Error = $"Card with Id {id} not found"
+                    Errors = new List<string>() { $"Card with Id {id} not found" }
                 };
                 return NotFound(resp);
             }
@@ -124,7 +124,7 @@ namespace api_flashcards_dotnet.Controllers
             {
                 var resp = new ErrorResponse()
                 {
-                    Error = $"Deck with Id {id} not found"
+                    Errors = new List<string>() { $"Deck with Id {id} not found" }
                 };
                 return NotFound(resp);
             }
@@ -135,7 +135,7 @@ namespace api_flashcards_dotnet.Controllers
             {
                 var resp = new ErrorResponse()
                 {
-                    Error = $"Card with Id {id} not found"
+                    Errors = new List<string>() { $"Card with Id {id} not found" }
                 };
                 return NotFound(resp);
             }
