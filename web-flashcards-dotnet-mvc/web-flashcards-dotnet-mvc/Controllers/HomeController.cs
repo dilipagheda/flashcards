@@ -7,23 +7,46 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using web_flashcards_dotnet_mvc.Data;
 using web_flashcards_dotnet_mvc.Models;
+using web_flashcards_dotnet_mvc.Services;
+using web_flashcards_dotnet_mvc.Services.Models;
+using web_flashcards_dotnet_mvc.ViewModels;
 
 namespace web_flashcards_dotnet_mvc.Controllers
 {
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
-        private readonly IDeckData deckData;
 
-        public HomeController(ILogger<HomeController> logger, IDeckData deckData)
+        private readonly FlashcardClient _flashcardClient;
+
+        public HomeController(ILogger<HomeController> logger, FlashcardClient flashcardClient)
         {
             _logger = logger;
-            this.deckData = deckData;
+            _flashcardClient = flashcardClient;
         }
 
-        public ViewResult Index()
+        [HttpGet]
+        public async Task<ViewResult> Index()
         {
-            return View(this.deckData);
+            DeckResponse deckResponse = await _flashcardClient.GetDecks();
+
+            List<DeckViewModel> decksToDisplay = new List<DeckViewModel>();
+
+            if(deckResponse != null)
+            {
+                foreach(var deck in deckResponse.Decks)
+                {
+                    decksToDisplay.Add(new DeckViewModel()
+                    {
+                        Id = deck.Id,
+                        Name = deck.Name,
+                        TotalCards = deck.totalCards
+                    });
+                }
+            }
+
+
+            return View(decksToDisplay);
         }
 
         public ViewResult CreateDeck()
@@ -32,25 +55,27 @@ namespace web_flashcards_dotnet_mvc.Controllers
         }
 
         [HttpPost]
-        public IActionResult CreateDeck(Deck deck)
+        public async Task<IActionResult> CreateDeck(Models.Deck deck)
         {
             if (!ModelState.IsValid)
             {
                 return View(deck);
             }
-            deckData.AddDeck(deck.Name);
+
+            var result = await _flashcardClient.CreateDeck(deck.Name);
+
+            if(!result.isSuccess)
+            {
+                foreach(var err in result.Errors.ErrorItems.Name)
+                {
+                    ModelState.AddModelError( err , err);
+                }
+                ModelState.AddModelError( "errorCreation" , "Problem creating a deck");
+                return View(deck);
+            }
+
             return RedirectToAction("Index");
         }
 
-        //public IActionResult Privacy()
-        //{
-        //    return View();
-        //}
-
-        [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
-        public ViewResult Error()
-        {
-            return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
-        }
     }
 }
