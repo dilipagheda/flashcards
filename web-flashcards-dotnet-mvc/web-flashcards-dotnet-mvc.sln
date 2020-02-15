@@ -3,6 +3,8 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "web-flashcards-dotnet-mvc", "web-flashcards-dotnet-mvc\web-flashcards-dotnet-mvc.csproj", "{FF19BBC3-5B50-4FCB-B5F7-F2190EBE59D5}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UnitTests", "UnitTests\UnitTests.csproj", "{AAEC552D-F05A-4040-BF22-D90DEA1E846D}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -13,5 +15,9 @@ Global
 		{FF19BBC3-5B50-4FCB-B5F7-F2190EBE59D5}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{FF19BBC3-5B50-4FCB-B5F7-F2190EBE59D5}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{FF19BBC3-5B50-4FCB-B5F7-F2190EBE59D5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AAEC552D-F05A-4040-BF22-D90DEA1E846D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AAEC552D-F05A-4040-BF22-D90DEA1E846D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AAEC552D-F05A-4040-BF22-D90DEA1E846D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AAEC552D-F05A-4040-BF22-D90DEA1E846D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
