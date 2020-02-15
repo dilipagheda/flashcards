@@ -15,11 +15,18 @@
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
       <PrivateAssets>all</PrivateAssets>
     </PackageReference>
+    <PackageReference Include="Flurl" Version="2.8.2" />
+    <PackageReference Include="Flurl.Http" Version="2.4.2" />
+    <PackageReference Include="Microsoft.AspNetCore.Identity" Version="2.2.0" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Data\" />
     <Folder Include="Views\DeckDetail\" />
     <Folder Include="Views\Quiz\" />
     <Folder Include="ViewModels\" />
+    <Folder Include="Services\" />
+    <Folder Include="Services\Models\" />
+    <Folder Include="Views\Account\" />
+    <Folder Include="Services\Models\ErrorHandling\" />
   </ItemGroup>
 </Project>
