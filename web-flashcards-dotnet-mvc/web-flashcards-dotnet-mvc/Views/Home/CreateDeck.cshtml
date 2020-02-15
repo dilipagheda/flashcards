@@ -3,11 +3,11 @@
 
 <h1>Add New Deck</h1>
 
+<div asp-validation-summary="All" class="text-danger"></div>
 <form asp-controller="Home" asp-action="CreateDeck" method="post">
   <div class="form-group">
     <label asp-for="Name">Deck Name</label>
-    <input asp-for="Name" class="form-control" aria-describedby="emailHelp" placeholder="Enter deck name">
-    <span asp-validation-for="Name"></span>
+    <input asp-for="Name" class="form-control" aria-describedby="deckname" placeholder="Enter deck name">
   </div>
 
   <button type="submit" class="btn btn-primary">Submit</button>

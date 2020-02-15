@@ -1,4 +1,4 @@
-﻿@model IDeckData
+﻿@model List<DeckViewModel>
 @{
     ViewData["Title"] = "Home Page";
 }
@@ -6,13 +6,13 @@
 <div>
     <h1 class="display-4" style="font-size:30px;color:grey;padding-bottom:10px;border-bottom:1px solid grey">My Decks</h1>
     <div class="row">
-        @foreach(Deck deck in Model.GetDecks())
+        @foreach(var deck in Model)
         {
                 <div class="col-sm-6 col-md-4 col-lg-3">
                   <div class="card m-3" style="box-shadow:10px 5px 5px grey;">
                       <div class="card-body">
                         <h5 class="card-title">@deck.Name</h5>
-                        <h6 class="card-subtitle mb-2 text-muted">@deck.Cards.Count cards</h6>
+                        <h6 class="card-subtitle mb-2 text-muted">@deck.TotalCards cards</h6>
                         <a asp-controller="DeckDetail" asp-action="Index" asp-route-id="@deck.Id" class="card-link">View</a>
                       </div>
                   </div>
