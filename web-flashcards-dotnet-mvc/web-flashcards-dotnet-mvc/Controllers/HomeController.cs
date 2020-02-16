@@ -55,14 +55,19 @@ namespace web_flashcards_dotnet_mvc.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> CreateDeck(Models.Deck deck)
+        public async Task<IActionResult> CreateDeck([FromBody]string name)
         {
+            var deck = new Deck()
+            {
+                Name = name
+            };
+
             if (!ModelState.IsValid)
             {
                 return View(deck);
             }
 
-            var result = await _flashcardClient.CreateDeck(deck.Name);
+            var result = await _flashcardClient.CreateDeck(name);
 
             if(!result.isSuccess)
             {
