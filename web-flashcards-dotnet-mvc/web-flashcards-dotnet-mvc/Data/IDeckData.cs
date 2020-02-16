@@ -6,14 +6,14 @@ namespace web_flashcards_dotnet_mvc.Data
 {
     public interface IDeckData
     {
-        IEnumerable<Deck> GetDecks();
-        void AddDeck(string name);
-        void AddCardToDeck(Card card);
-        void DeleteCardFromDeck(int deckId, int cardId);
-        Card GetNextCardFromDeck(int deckId, int currentCardId);
-        void UpdateQuizResult(int deckId,bool isCorrect);
-        QuizResult GetQuizResult(int deckId);
-        void ResetQuizResult(int deckId);
-        int Commit();
+        //IEnumerable<Deck> GetDecks();
+        //void AddDeck(string name);
+        //void AddCardToDeck(Card card);
+        //void DeleteCardFromDeck(int deckId, int cardId);
+        //Card GetNextCardFromDeck(int deckId, int currentCardId);
+        //void UpdateQuizResult(int deckId,bool isCorrect);
+        //QuizResult GetQuizResult(int deckId);
+        //void ResetQuizResult(int deckId);
+        //int Commit();
     }
 }
