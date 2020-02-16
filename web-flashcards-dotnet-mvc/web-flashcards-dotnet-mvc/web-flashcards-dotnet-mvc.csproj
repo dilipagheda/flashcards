@@ -29,4 +29,10 @@
     <Folder Include="Views\Account\" />
     <Folder Include="Services\Models\ErrorHandling\" />
   </ItemGroup>
+  <ItemGroup>
+    <Compile Remove="Models\ErrorViewModel.cs" />
+    <Compile Remove="Models\Deck.cs" />
+    <Compile Remove="Models\Card.cs" />
+    <Compile Remove="ViewModels\Deck.cs" />
+  </ItemGroup>
 </Project>
