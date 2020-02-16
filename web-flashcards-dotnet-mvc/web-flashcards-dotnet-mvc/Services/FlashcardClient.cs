@@ -36,7 +36,8 @@ namespace web_flashcards_dotnet_mvc.Services
                                                     .ReceiveJson<ApplicationUser>();
 
                 
-            }catch(Exception _)
+            }
+            catch (FlurlHttpException e)
             {
                 return null;
             }
@@ -59,7 +60,8 @@ namespace web_flashcards_dotnet_mvc.Services
                                                         DisplayName = displayName
                                                     })
                                                     .ReceiveJson<RegisterResponse>();
-            }catch(Exception _)
+            }
+            catch (FlurlHttpException e)
             {
                 return null;
             }
@@ -78,7 +80,8 @@ namespace web_flashcards_dotnet_mvc.Services
                 deckResponse = await _baseUrl.AppendPathSegment("/decks")
                                              .WithOAuthBearerToken(_token)
                                              .GetJsonAsync<DeckResponse>();
-            }catch(Exception _)
+            }
+            catch (FlurlHttpException e)
             {
                 return null;
             }
@@ -100,7 +103,8 @@ namespace web_flashcards_dotnet_mvc.Services
 
                 response.isSuccess = result.IsSuccessStatusCode;
 
-            }catch(FlurlHttpException e)
+            }
+            catch(FlurlHttpException e)
             {
 
                 response.Errors = await e.GetResponseJsonAsync<Errors>();
@@ -109,8 +113,43 @@ namespace web_flashcards_dotnet_mvc.Services
             return response;
         }
 
+        public async Task<Deck> GetDeckById(int id)
+        {
+            Deck deck = null;
 
+            if (!CheckToken()) return null;
 
+            try
+            {
+                deck = await _baseUrl.AppendPathSegment($"/decks/{id}")
+                                             .WithOAuthBearerToken(_token)
+                                             .GetJsonAsync<Deck>();
+            }
+            catch (FlurlHttpException e)
+            {
+                return null;
+            }
+            return deck;
+        }
+
+        public async Task<GetCardByIdResponse> GetCardsByDeckId(int deckId)
+        {
+            GetCardByIdResponse getCardByIdResponse = null;
+
+            if (!CheckToken()) return null;
+
+            try
+            {
+                getCardByIdResponse = await _baseUrl.AppendPathSegment($"/decks/{deckId}/cards")
+                                                     .WithOAuthBearerToken(_token)
+                                                     .GetJsonAsync<GetCardByIdResponse>();
+            }
+            catch (FlurlHttpException e)
+            {
+                return null;
+            }
+            return getCardByIdResponse;
+        }
 
         private bool CheckToken()
         {
