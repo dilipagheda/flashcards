@@ -151,6 +151,53 @@ namespace web_flashcards_dotnet_mvc.Services
             return getCardByIdResponse;
         }
 
+        public async Task<CreateCardResponse> CreateCardByDeckId(int deckId,string questionText, string answerText)
+        {
+            var response = new CreateCardResponse();
+
+            try
+            {
+                var result = await _baseUrl.AppendPathSegment($"/decks/{deckId}/cards")
+                              .WithOAuthBearerToken(_token)
+                              .PostJsonAsync(new
+                              {
+                                  QuestionText = questionText,
+                                  AnswerText = answerText
+                              });
+
+                response.IsSuccess = result.IsSuccessStatusCode;
+
+            }
+            catch (FlurlHttpException e)
+            {
+
+                response.Errors = await e.GetResponseJsonAsync<Errors>();
+            }
+
+            return response;
+        }
+
+        public async Task<DeleteCardResponse> DeleteCardByDeckId(int deckId, int cardId)
+        {
+            var response = new DeleteCardResponse();
+
+            try
+            {
+                var result = await _baseUrl.AppendPathSegment($"/decks/{deckId}/cards/{cardId}")
+                                           .WithOAuthBearerToken(_token)
+                                           .DeleteAsync();
+
+                response.IsSuccess = result.IsSuccessStatusCode;
+
+            }
+            catch(FlurlHttpException e)
+            {
+                response.Errors = await e.GetResponseJsonAsync<List<string>>();
+            }
+
+            return response;
+        }
+
         private bool CheckToken()
         {
             if (_token == null || _token.Length == 0) return false;
