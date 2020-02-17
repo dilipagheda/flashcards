@@ -55,19 +55,14 @@ namespace web_flashcards_dotnet_mvc.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> CreateDeck([FromBody]string name)
+        public async Task<IActionResult> CreateDeck(DeckViewModel deckViewModel)
         {
-            var deck = new Deck()
-            {
-                Name = name
-            };
-
             if (!ModelState.IsValid)
             {
-                return View(deck);
+                return View(deckViewModel);
             }
 
-            var result = await _flashcardClient.CreateDeck(name);
+            var result = await _flashcardClient.CreateDeck(deckViewModel.Name);
 
             if(!result.isSuccess)
             {
@@ -76,7 +71,7 @@ namespace web_flashcards_dotnet_mvc.Controllers
                     ModelState.AddModelError( err , err);
                 }
                 ModelState.AddModelError( "errorCreation" , "Problem creating a deck");
-                return View(deck);
+                return View(deckViewModel);
             }
 
             return RedirectToAction("Index");
