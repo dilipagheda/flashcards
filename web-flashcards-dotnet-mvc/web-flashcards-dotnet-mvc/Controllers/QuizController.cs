@@ -5,6 +5,8 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using web_flashcards_dotnet_mvc.Data;
 using web_flashcards_dotnet_mvc.Models;
+using web_flashcards_dotnet_mvc.Services;
+using web_flashcards_dotnet_mvc.Services.Models;
 using web_flashcards_dotnet_mvc.ViewModels;
 // For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -12,35 +14,22 @@ namespace web_flashcards_dotnet_mvc.Controllers
 {
     public class QuizController : Controller
     {
-        private readonly IDeckData deckData;
+        private readonly FlashcardClient _flashcardClient;
 
-        public QuizController(IDeckData deckData)
+        public QuizController(FlashcardClient flashcardClient)
         {
-            this.deckData = deckData;
+            _flashcardClient = flashcardClient;
         }
 
-        // GET: /<controller>/
-        public ViewResult Index(int id, int currentCardId)
+        public async Task<IActionResult> GetCardsByDeckId(int id)
         {
-            Card card = deckData.GetNextCardFromDeck(id, currentCardId);
-            if (card == null)
+            var deck = await _flashcardClient.GetDeckById(id);
+            if(deck==null)
             {
-                return View("QuizResult", deckData.GetQuizResult(id));
+                return Json(new EmptyResult());
             }
-            QuizCard quizCard = new QuizCard()
-            {
-                Question = card.Question,
-                Answer = card.Answer,
-                DeckId = card.DeckId,
-                CardId = card.Id,
-            };
-            return View(quizCard);
-        }
-        //GET
-        public IActionResult UserResponse(int id, bool isCorrect, int currentCardId)
-        {
-            deckData.UpdateQuizResult(id, isCorrect);
-            return RedirectToAction("Index", new { id , currentCardId });
+            var result = await _flashcardClient.GetCardsByDeckId(id);
+            return Json(result.Cards);
         }
     }
 }
