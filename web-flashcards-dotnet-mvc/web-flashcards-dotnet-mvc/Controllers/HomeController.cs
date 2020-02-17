@@ -77,5 +77,26 @@ namespace web_flashcards_dotnet_mvc.Controllers
             return RedirectToAction("Index");
         }
 
+        public async Task<IActionResult> DeleteDeck(int deckId)
+        {
+            var deck = await _flashcardClient.GetDeckById(deckId);
+
+            if (deck != null)
+            {
+                var result = await _flashcardClient.DeleteDeckById(deckId);
+
+                if (!result.IsSuccess)
+                {
+                    return NotFound();
+                }
+
+                return RedirectToAction("Index");
+            }
+            else
+            {
+                return View("NotFound");
+            }
+        }
+
     }
 }
