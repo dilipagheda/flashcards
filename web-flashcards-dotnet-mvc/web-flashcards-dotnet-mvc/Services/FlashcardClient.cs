@@ -198,6 +198,27 @@ namespace web_flashcards_dotnet_mvc.Services
             return response;
         }
 
+        public async Task<DeleteDeckResponse> DeleteDeckById(int deckId)
+        {
+            var response = new DeleteDeckResponse();
+
+            try
+            {
+                var result = await _baseUrl.AppendPathSegment($"/decks/{deckId}")
+                                           .WithOAuthBearerToken(_token)
+                                           .DeleteAsync();
+
+                response.IsSuccess = result.IsSuccessStatusCode;
+
+            }
+            catch (FlurlHttpException e)
+            {
+                response.Errors = await e.GetResponseJsonAsync<List<string>>();
+            }
+
+            return response;
+        }
+
         private bool CheckToken()
         {
             if (_token == null || _token.Length == 0) return false;
