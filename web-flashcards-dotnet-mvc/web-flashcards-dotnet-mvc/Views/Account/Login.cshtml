@@ -1,4 +1,13 @@
-﻿@model LoginViewModel
+﻿@using Microsoft.AspNetCore.Identity
+@using Microsoft.AspNetCore.Http;
+@using System.Security.Claims;
+@inject IHttpContextAccessor httpContextAccessor
+
+@{
+    string returnUrl = httpContextAccessor.HttpContext.Request.Query["ReturnUrl"];
+}
+
+@model LoginViewModel
 
 <div class="container">
     <div class="row justify-content-center">
@@ -23,10 +32,11 @@
                 <div class="row justify-content-center">
                     <button type="submit" class="login-button m-2 p-2">Log in</button>
                 </div>
+                @Html.Hidden("ReturnUrl", returnUrl)
             </form>
             <div class="row justify-content-center">
                 <a asp-action="Register">Register new account</a>
             </div>
-            </div>
         </div>
+    </div>
 </div>

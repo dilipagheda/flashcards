@@ -1,8 +1,10 @@
 ﻿using System.Collections.Generic;
 using System.Security.Claims;
+using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using web_flashcards_dotnet_mvc.Services;
 using web_flashcards_dotnet_mvc.ViewModels;
@@ -25,10 +27,17 @@ namespace web_flashcards_dotnet_mvc.Controllers
             return View();
         }
 
+        [HttpGet]
+        public async Task<IActionResult> Logout()
+        {
+            await HttpContext.SignOutAsync();
+            return RedirectToAction("Login","Account");
+        }
+
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
-        public async System.Threading.Tasks.Task<IActionResult> Login(LoginViewModel loginViewModel)
+        public async Task<IActionResult> Login(LoginViewModel loginViewModel)
         {
 
             if (!ModelState.IsValid)
@@ -83,7 +92,14 @@ namespace web_flashcards_dotnet_mvc.Controllers
                 new ClaimsPrincipal(claimsIdentity),
                 authProperties);
 
-            return RedirectToAction("Index", "Home");
+            if (Url.IsLocalUrl(loginViewModel.ReturnUrl))
+            {
+                return Redirect(loginViewModel.ReturnUrl);
+            }
+            else
+            {
+                return RedirectToAction("Index", "Home");
+            }
         }
     }
 }

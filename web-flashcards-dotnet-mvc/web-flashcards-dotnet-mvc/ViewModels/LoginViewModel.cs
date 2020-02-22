@@ -12,5 +12,7 @@ namespace web_flashcards_dotnet_mvc.ViewModels
         [Required]
         [DataType(DataType.Password)]
         public string Password { get; set; }
+
+        public string ReturnUrl { get; set; }
     }
 }
