@@ -1,3 +1,76 @@
 ﻿/* Please see documentation at https://docs.microsoft.com/aspnet/core/client-side/bundling-and-minification
 for details on configuring this project to bundle and minify static web assets. */
 
+body {
+    background-color: #F3F3F3;
+}
+
+nav {
+    background-color: #A64AC9 !important;
+}
+
+.navbar-brand, .nav-link {
+    color: #FCCD04 !important;
+}
+.deck-detail-header, .card-detail-header {
+    padding-bottom: 10px;
+    border-bottom: 1px solid grey;
+    box-shadow: 10px 5px 5px grey;
+    padding: 10px;
+    background-color: white;
+    border: 1px solid lightgrey;
+    border-left: 10px solid #FCCD04;
+}
+
+.deck-detail-header-deckname {
+    font-size: 30px;
+}
+
+.add-new-card-link{
+    padding-left:0;
+}
+
+.start-quiz-container{
+    text-align:end;
+}
+
+.start-quiz-button {
+    background-color: #FCCD04;
+    color: #A64AC9;
+    border: none;
+}
+
+.delete-card-button{
+    padding-left:0;
+}
+
+.card{
+    border:none;
+    border-bottom:1px solid lightgrey;
+}
+
+.add-new-card-container
+{
+    border-bottom:1px solid lightgrey;
+}
+
+.deck-container {
+    border: 1px solid lightgrey;
+    border-left: 10px solid #FCCD04;
+}
+
+.login-button {
+    background-color: #A64AC9 !important;
+    color: #FCCD04;
+    width:100%;
+}
+
+.login-container {
+    padding-bottom: 10px;
+    border-bottom: 1px solid grey;
+    box-shadow: 10px 5px 5px grey;
+    padding: 10px;
+    background-color: white;
+    border: 1px solid lightgrey;
+    border-top: 10px solid #FCCD04;
+}
