@@ -1,12 +1,129 @@
-﻿@model QuizCard
+﻿@model int
 
 
 <div class="row">
-    <div class="col-12" style="text-align:center">
-        <div style="margin:10px">@Model.Question</div>
-        
-        <a href='@Url.Action("UserResponse","Quiz", new { id= Model.DeckId, IsCorrect = true, currentCardId=Model.CardId })' class="btn btn-primary">Correct</a>
-        <a href='@Url.Action("UserResponse","Quiz",new { id=Model.DeckId, IsCorrect = false, currentCardId=Model.CardId })' class="btn btn-secondary">Incorrect</a>
 
-    </div>
 </div>
+
+
+@section Scripts
+{
+        <script type="text/javascript" src="@Url.Content("~/lib/jquery/dist/jquery.min.js")"></script>
+        <script type="text/javascript">
+        $(document).ready(function () {
+
+            let current = 0;
+            let totalCorrect = 0;
+            let showAnswer = false;
+
+            //show spinner
+            let spinnerHtml = `<div class="container text-center m-3">
+                                <div class="spinner-demo">
+                                    <div class="spinner-border text-primary" role="status">
+                                        <span class="sr-only">Loading...</span>
+                                    </div>
+                                </div>
+                              </div>`;
+
+            $("div.row").html(spinnerHtml);
+
+            //content html
+            let contentHtml = `<div class="col-12 text-center">
+                                    <h1>Quiz</h1>
+                                    <p id="counter"></p>
+                                    <div id="questionText" class="m-3"></div>
+                                    <div id="answerText" class="m-3"></div>
+                               </div>
+                               <div class="col-12 text-center">
+                                    <button id="showAnswer" class="btn btn-link">Show Answer</button>
+                               </div>
+                               <div class="col-12 text-center">
+                                    <button type="button" class="btn btn-primary" id="correct">Correct</button>
+                                    <button type="button" class="btn btn-secondary" id="incorrect">Incorrect</button>
+                               </div>`;
+
+            //result html
+            let resultHtml = `<div class="col-12 text-center">
+                                <p id="result"></p>
+                             </div>
+                             <div class="col-12 text-center">
+                                    <button id="startOver" class="btn btn-link">Start Over</button>
+                             </div>`;
+
+            function showScore() {
+                $("div#questionText").text("");
+
+            }
+
+            $.getJSON("/quiz/getcardsbydeckid/@Model", function (data) {
+                console.log(data);
+                loadData();   
+
+                function loadData() {
+                    current = 0;
+                    totalCorrect = 0;
+                    $("div.row").empty();
+                    $("div.row").html(contentHtml);
+                    displayCurrentQuestion();
+                    //click handler- correct button
+                    $("button#correct").click(function () {
+
+                        current = current + 1;
+                        totalCorrect = totalCorrect + 1;
+                        
+                        if (current >= data.length) {
+                            //show score here
+                            showScore();
+                        } else {
+                            displayCurrentQuestion();
+                        }
+                    });
+
+                    //click handler - incorrect button
+                    $("button#incorrect").click(function () {
+
+                        current = current + 1;
+                        
+                        if (current >= data.length) {
+                            //show score here
+                            showScore();
+                        } else {
+                            displayCurrentQuestion();
+                        }
+                    });
+
+                    //show answer
+                    $("button#showAnswer").click(function () {
+
+                        showAnswer = !showAnswer;
+
+                        if (showAnswer) {
+                            $("#answerText").text(data[current].answerText);
+                            $("#showAnswer").text("Hide Answer");
+                        }
+                        else {
+                            $("#answerText").text("");
+                            $("#showAnswer").text("Show Answer");
+                        }
+                    });
+
+                    function displayCurrentQuestion() {
+                        $("div#questionText").text(data[current].questionText);
+                        $("#counter").text(`Question ${current + 1} of ${data.length}`);
+                    }
+                }
+
+                function showScore() {
+                    $("div.row").empty();
+                    $("div.row").html(resultHtml);
+                    //start over
+                    $("button#startOver").click(function () {
+                        loadData();
+                    });
+                    $("p#result").text(`You answered ${totalCorrect} questions corrrectly!`);
+                }
+            });
+
+        });
+        </script>
+}
