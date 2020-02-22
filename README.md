@@ -65,6 +65,36 @@ https://www.quackit.com/sql_server/mac/install_sql_server_on_a_mac.cfm
 - Unit Testing is done through xUnit
 - E2E Testing is done through Cypress
 
+## Screenshots
+
+### Login screen
+<img src="https://github.com/dilipagheda/flashcards/blob/master/screenshots/mvc/login.png"/> 
+
+### Login screen - login failed
+<img src="https://github.com/dilipagheda/flashcards/blob/master/screenshots/mvc/loginerror1.png" /> 
+
+### Login screen - mandatory fields
+<img src="https://github.com/dilipagheda/flashcards/blob/master/screenshots/mvc/loginerror2.png" /> 
+
+### Add New Deck
+<img src="https://github.com/dilipagheda/flashcards/blob/master/screenshots/mvc/adddeck.png"  /> 
+
+### Add New Card to a given deck
+<img src="https://github.com/dilipagheda/flashcards/blob/master/screenshots/mvc/addnewcard.png"  /> 
+
+### Deck Detail View
+<img src="https://github.com/dilipagheda/flashcards/blob/master/screenshots/mvc/deckdetail.png" w /> 
+
+### Home page - Shows list of Decks
+<img src="https://github.com/dilipagheda/flashcards/blob/master/screenshots/mvc/home.png"  /> 
+
+### Quiz page - User quizes based on a card in a deck - Implemented in client side JavaScript
+<img src="https://github.com/dilipagheda/flashcards/blob/master/screenshots/mvc/quiz.png"  /> 
+
+### Quiz Result page
+<img src="https://github.com/dilipagheda/flashcards/blob/master/screenshots/mvc/quizresult.png"  /> 
+
+
 # Project-3: Flashcards Restful APIs - Implementation using .NET Core 3.0 MVC, EF Core and SQLite Db
 ## Foldername: api-flashcards-dotnet
 The aim of this project is to build Restful APIs using .NET Core 3.0 MVC, EF Core and SQLite Db. It is using standard pattern of MVC using .Net Core 3.0.
