@@ -102,28 +102,33 @@ The aim of this project is to build Restful APIs using .NET Core 3.0 MVC, EF Cor
 Postman collection is also included in the project for running locally.
 
 At the moment, there are below APIs.
-
-- GET https://localhost:5001/decks
+- POST /user/login
+  Returns JWT token if user is valid
+  
+- POST /user/register
+  Creates the user in database
+  
+- GET /decks
   
   get all decks
   
-- POST https://localhost:5001/decks
+- POST /decks
   
   create new deck. it supports only one deck at a  time.
   
-- GET https://localhost:5001/decks/{id}
+- GET /decks/{id}
   
   get a deck by deckId
   
-- POST https://localhost:5001/decks/{id}/cards
+- POST /decks/{id}/cards
   
   create a new card for a specific deck
   
-- GET https://localhost:5001/decks/{id}/cards
+- GET /decks/{id}/cards
   
   get all cards for a specific deck
   
-- GET https://localhost:5001/decks/{id}/Cards/{id}
+- GET /decks/{id}/Cards/{id}
   
   get a specific card for a specific deck
 
@@ -134,6 +139,7 @@ At the moment, there are below APIs.
 
 ## Skills used
 - .NET Core 3.0 MVC
+- Authentication & Authorisation with Cookie Based Authentication in Web App and JWT token based in API
 - C#
 - Entity Framework Core
 - SQLite3
@@ -141,5 +147,13 @@ At the moment, there are below APIs.
 - Automapper
 - xUnit
 - Integration testing using In-memory localhost and db
+
+## Screenshots
+
+<img src="https://github.com/dilipagheda/flashcards/blob/master/screenshots/api/1.png"  /> 
+
+<img src="https://github.com/dilipagheda/flashcards/blob/master/screenshots/api/2.png"  /> 
+
+<img src="https://github.com/dilipagheda/flashcards/blob/master/screenshots/api/3.png"  /> 
 
 
