@@ -1,12 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
+﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
-using web_flashcards_dotnet_mvc.Data;
-using web_flashcards_dotnet_mvc.Models;
 using web_flashcards_dotnet_mvc.Services;
 using web_flashcards_dotnet_mvc.Services.Models;
 using web_flashcards_dotnet_mvc.ViewModels;

@@ -1,13 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-using web_flashcards_dotnet_mvc.Data;
-using web_flashcards_dotnet_mvc.Models;
 using web_flashcards_dotnet_mvc.Services;
-using web_flashcards_dotnet_mvc.Services.Models;
-using web_flashcards_dotnet_mvc.ViewModels;
 // For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
 namespace web_flashcards_dotnet_mvc.Controllers
@@ -30,6 +23,13 @@ namespace web_flashcards_dotnet_mvc.Controllers
             }
             var result = await _flashcardClient.GetCardsByDeckId(id);
             return Json(result.Cards);
+        }
+
+        [HttpGet]
+        [Route("Quiz/Index/{id:int:min(1)}")]
+        public IActionResult Index(int id)
+        {
+            return View(id);
         }
     }
 }

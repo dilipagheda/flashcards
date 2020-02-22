@@ -1,13 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Security.Claims;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using web_flashcards_dotnet_mvc.Services;
-using web_flashcards_dotnet_mvc.Services.Models;
 using web_flashcards_dotnet_mvc.ViewModels;
 
 namespace web_flashcards_dotnet_mvc.Controllers
@@ -49,7 +46,9 @@ namespace web_flashcards_dotnet_mvc.Controllers
 
             var claims = new List<Claim>
                             {
-                                new Claim("AccessToken",applicationUser.Token)
+                                new Claim("AccessToken",applicationUser.Token),
+                                new Claim(ClaimTypes.Name,applicationUser.DisplayName)
+                                
                             };
 
             var claimsIdentity = new ClaimsIdentity(
