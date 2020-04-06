@@ -49,6 +49,9 @@ This project is the web implementation of Flashcards using .NET Core 3.0 MVC. It
 - Once Installed, simply open the project and run it by pressing 'play' button in VS Studio
 - From command line, you can run `dotnet watch run` to run the project using Krestrel web server.
 
+More detailed instructions are on Wiki
+https://github.com/dilipagheda/flashcards/wiki/How-to-Run-the-.Net-Core-Web-application
+
 If you are on MacOS, Try VS Studio for MAC. It's amazing. For SQL server on MAC, refer to this article: 
 https://www.quackit.com/sql_server/mac/install_sql_server_on_a_mac.cfm
 
