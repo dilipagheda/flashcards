@@ -3,7 +3,6 @@ import { StyleSheet, View, Text, Button } from 'react-native';
 import { purple, white } from '../utils/colors';
 import { connect } from 'react-redux';
 import AppButton from './AppButton';
-import { HitTestResultTypes } from 'expo/build/AR';
 
 import { clearLocalNotification, setLocalNotification } from '../utils/helpers';
 
@@ -56,7 +55,7 @@ class Quiz extends Component {
 	render() {
 		if (this.state.showResults) {
 			//reset the notification as one quiz is complete
-			clearLocalNotification().then(setLocalNotification);
+			//clearLocalNotification().then(setLocalNotification);
 			return (
 				<View style={styles.container}>
 					<View style={{ margin: 20 }}>
